@@ -1,6 +1,15 @@
 @import "tailwindcss";
 
 :root {
+  /* SHILPAKALE Brand Colors */
+  --heritage-green: #0B3A2F;
+  --ivory-archive: #FDF6E3;
+  --charcoal-black: #1E1E1E;
+  --archive-sage: #6E8B74;
+  
+  /* Temporary fallback font for wordmark */
+  --font-wordmark: var(--font-geist-sans);
+  
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -8,8 +17,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-heritage-green: var(--heritage-green);
+  --color-ivory-archive: var(--ivory-archive);
+  --color-charcoal-black: var(--charcoal-black);
+  --color-archive-sage: var(--archive-sage);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-wordmark: var(--font-wordmark);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +37,50 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  /* Disable transitions and animations for reduced motion */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Header Navigation Link Animated Underline */
+.header-nav-link {
+  position: relative;
+  display: inline-flex;
+  text-decoration: none;
+}
+
+.header-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.25rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 280ms ease;
+}
+
+.header-nav-link:hover::after,
+.header-nav-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
 }
