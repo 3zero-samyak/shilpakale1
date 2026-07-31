@@ -24,6 +24,7 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-wordmark: var(--font-wordmark);
+  --font-montserrat: var(--font-montserrat);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -83,4 +84,102 @@ html {
 .header-nav-link:focus-visible::after {
   transform: scaleX(1);
   transform-origin: left center;
+}
+
+/* Menu Navigation Link Rounded Outline Hover */
+.menu-nav-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid rgba(253, 246, 227, 0.18); /* subtle cream outline by default */
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem; /* reduce size for a more compact menu */
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+}
+
+.menu-nav-link:hover,
+.menu-nav-link:focus-visible {
+  border-color: var(--ivory-archive);
+  background-color: rgba(253, 246, 227, 0.06);
+}
+
+/* Account Option Button */
+.account-option-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 1.25rem 2rem;
+  border: 1px solid var(--heritage-green);
+  border-radius: 999px;
+  background-color: var(--ivory-archive);
+  color: var(--heritage-green);
+  text-decoration: none;
+  transition: background-color 300ms ease, color 300ms ease;
+  cursor: pointer;
+}
+
+.account-option-button:hover,
+.account-option-button:focus-visible {
+  background-color: var(--heritage-green);
+  color: var(--ivory-archive);
+}
+
+.account-option-button:focus-visible {
+  outline: 2px solid rgba(11, 58, 47, 0.5);
+  outline-offset: 3px;
+}
+
+/* Form Input Field */
+.form-input-field {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(11, 58, 47, 0.45);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--heritage-green);
+  font-size: 1rem;
+  transition: border-color 200ms ease;
+}
+
+.form-input-field:focus {
+  outline: 2px solid rgba(11, 58, 47, 0.14);
+  outline-offset: 2px;
+  border-color: var(--heritage-green);
+}
+
+.form-input-field::placeholder {
+  color: rgba(11, 58, 47, 0.5);
+}
+
+.form-input-field[aria-invalid="true"] {
+  border-color: #c53030;
+}
+
+/* Featured Collections View Link */
+.featured-collections-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.7rem 1.2rem;
+  color: var(--ivory-archive);
+  background: transparent;
+  text-decoration: none;
+  transition: border-color 280ms ease, background-color 280ms ease;
+  cursor: pointer;
+}
+
+.featured-collections-link:hover,
+.featured-collections-link:focus-visible {
+  border-color: var(--ivory-archive);
+  background-color: rgba(253, 246, 227, 0.05);
+}
+
+.featured-collections-link:focus-visible {
+  outline: none;
 }

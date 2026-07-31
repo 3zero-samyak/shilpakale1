@@ -74,7 +74,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </Link>
             )}
             <Link
-              href="/contact?enquiry=product"
+              href={`/enquire?product=${product.id}`}
               className="header-nav-link text-xs md:text-sm uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-2 focus:ring-offset-[var(--ivory-archive)]"
               style={{
                 color: 'var(--heritage-green)',

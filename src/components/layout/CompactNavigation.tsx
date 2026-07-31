@@ -2,13 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-
-const navigation = [
-  { name: 'HOME', href: '/' },
-  { name: 'COLLECTION', href: '/collections' },
-  { name: 'STORIES', href: '/stories' },
-  { name: 'ABOUT US', href: '/about' },
-];
+import { primaryNavigation } from '@/data/navigation';
 
 interface CompactNavigationProps {
   isOpen: boolean;
@@ -91,15 +85,15 @@ export default function CompactNavigation({ isOpen, onClose }: CompactNavigation
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex flex-col px-6 py-8">
-          {navigation.map((item) => (
+        <nav className="flex flex-col px-6 py-6 gap-2">
+          {primaryNavigation.map((item) => (
             <Link
-              key={item.name}
+              key={item.label}
               href={item.href}
               onClick={onClose}
-              className="header-nav-link text-[var(--ivory-archive)] text-lg tracking-wide py-3 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)]"
+              className="menu-nav-link text-[var(--ivory-archive)] text-sm tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)]"
             >
-              {item.name}
+              {item.label}
             </Link>
           ))}
         </nav>

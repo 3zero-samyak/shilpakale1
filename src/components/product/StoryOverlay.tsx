@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import type { Product } from '@/data/collections';
+import { getStoryByProductHandle } from '@/data/stories';
 
 interface StoryOverlayProps {
   product: Product;
@@ -13,6 +14,9 @@ interface StoryOverlayProps {
 export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Get story from shared data source
+  const story = getStoryByProductHandle(product.id);
 
   // Handle escape key
   useEffect(() => {
@@ -45,7 +49,7 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
     };
   }, [isOpen]);
 
-  if (!isOpen || !product.story) return null;
+  if (!isOpen || !story) return null;
 
   return (
     <div
@@ -95,7 +99,7 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
                 fontWeight: 400,
               }}
             >
-              {product.story.title}
+              {story.storyTitle}
             </h2>
             <button
               ref={closeButtonRef}
@@ -114,109 +118,102 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
 
         {/* Story Content */}
         <div className="max-w-3xl mx-auto px-[5vw] py-12 md:py-16">
-          {/* Eyebrow */}
+          {/* Story Number */}
           <p
             className="text-xs md:text-sm uppercase mb-4 md:mb-6"
             style={{
-              color: 'var(--heritage-green)',
+              color: 'var(--archive-sage)',
               letterSpacing: '0.2em',
-              opacity: 0.6,
+              fontWeight: 500,
             }}
           >
-            {product.story.eyebrow}
+            STORY {story.number}
           </p>
 
-          {/* Story Title (repeated for mobile) */}
+          {/* Product Name */}
           <h1
-            className="text-3xl md:text-4xl lg:text-5xl mb-6 md:mb-8"
+            className="text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6"
             style={{
               color: 'var(--heritage-green)',
               fontFamily: 'Georgia, serif',
               fontWeight: 400,
-              lineHeight: 1.2,
+              lineHeight: 1.1,
+              letterSpacing: '-0.02em',
             }}
           >
-            {product.story.title}
+            {story.productName}
           </h1>
 
-          {/* Introduction */}
-          <p
-            className="text-lg md:text-xl mb-12 md:mb-16"
+          {/* Story Title */}
+          <h2
+            className="text-sm md:text-base uppercase mb-4 md:mb-6"
             style={{
               color: 'var(--heritage-green)',
-              opacity: 0.85,
-              lineHeight: 1.6,
+              fontFamily: 'var(--font-montserrat)',
+              letterSpacing: '0.2em',
+              fontWeight: 500,
             }}
           >
-            {product.story.introduction}
+            {story.storyTitle}
+          </h2>
+
+          {/* Story Line */}
+          <p
+            className="text-base md:text-lg mb-6 md:mb-8"
+            style={{
+              color: 'var(--heritage-green)',
+              opacity: 0.7,
+              lineHeight: 1.5,
+            }}
+          >
+            {story.storyLine}
+          </p>
+
+          {/* Opening Statement */}
+          <p
+            className="text-xl md:text-2xl mb-12 md:mb-16"
+            style={{
+              color: 'var(--heritage-green)',
+              opacity: 0.9,
+              lineHeight: 1.45,
+            }}
+          >
+            {story.openingStatement}
           </p>
 
           {/* Story Sections */}
           <div className="space-y-10 md:space-y-12">
-            {product.story.sections.map((section, index) => (
+            {story.sections.map((section, index) => (
               <div key={index}>
                 <h3
-                  className="text-xl md:text-2xl mb-4"
+                  className="text-sm md:text-base uppercase mb-4"
                   style={{
                     color: 'var(--heritage-green)',
-                    fontFamily: 'Georgia, serif',
-                    fontWeight: 400,
-                    lineHeight: 1.3,
+                    fontFamily: 'var(--font-montserrat)',
+                    letterSpacing: '0.15em',
+                    fontWeight: 600,
                   }}
                 >
                   {section.heading}
                 </h3>
-                <p
-                  className="text-base md:text-lg"
-                  style={{
-                    color: 'var(--heritage-green)',
-                    opacity: 0.8,
-                    lineHeight: 1.7,
-                  }}
-                >
-                  {section.content}
-                </p>
+                <div className="space-y-4">
+                  {section.paragraphs.map((paragraph, pIndex) => (
+                    <p
+                      key={pIndex}
+                      className="text-base md:text-lg"
+                      style={{
+                        color: 'var(--heritage-green)',
+                        opacity: 0.85,
+                        lineHeight: 1.85,
+                      }}
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
-
-          {/* Closing Note */}
-          {product.story.closingNote && (
-            <div
-              className="mt-12 md:mt-16 pt-8 md:pt-10 border-t"
-              style={{
-                borderColor: 'rgba(11, 58, 47, 0.15)',
-              }}
-            >
-              <p
-                className="text-base md:text-lg"
-                style={{
-                  color: 'var(--heritage-green)',
-                  opacity: 0.75,
-                  lineHeight: 1.7,
-                  fontStyle: 'italic',
-                }}
-              >
-                {product.story.closingNote}
-              </p>
-            </div>
-          )}
-
-          {/* Sources */}
-          {product.story.sources && (
-            <div className="mt-8">
-              <p
-                className="text-sm"
-                style={{
-                  color: 'var(--heritage-green)',
-                  opacity: 0.5,
-                  lineHeight: 1.6,
-                }}
-              >
-                {product.story.sources}
-              </p>
-            </div>
-          )}
         </div>
       </div>
     </div>

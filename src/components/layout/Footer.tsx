@@ -1,269 +1,202 @@
 import Link from 'next/link';
+import { footerColumns } from '@/data/footerNavigation';
 
 export default function Footer() {
   return (
-    <footer
-      className="w-full py-16 md:py-20 border-t"
-      style={{
-        backgroundColor: 'var(--heritage-green)',
-        borderColor: 'var(--ivory-archive)',
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-[5vw]">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 md:gap-8 mb-12">
-          {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <h2
-              className="text-2xl mb-3"
-              style={{
-                color: 'var(--ivory-archive)',
-                fontFamily: 'Georgia, serif',
-                fontWeight: 400,
-              }}
-            >
-              ShilpaKale
-            </h2>
-            <p
-              className="text-base mb-4"
-              style={{
-                color: 'var(--ivory-archive)',
-                opacity: 0.8,
-                fontFamily: 'Georgia, serif',
-                fontStyle: 'italic',
-              }}
-            >
-              Tracing Roots. Shaping Forms.
-            </p>
-            
-            {/* WhatsApp Link */}
-            <a
-              href="https://wa.me/your-number"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm hover:opacity-70 transition-opacity"
-              style={{
-                color: 'var(--ivory-archive)',
-                opacity: 0.9,
-              }}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                  fill="currentColor"
-                />
-              </svg>
-              WhatsApp Us
-            </a>
-          </div>
-
-          {/* Explore Column */}
-          <div>
-            <h3
-              className="text-sm uppercase mb-4"
-              style={{
-                color: 'var(--ivory-archive)',
-                letterSpacing: '0.1em',
-                fontWeight: 600,
-              }}
-            >
-              Explore
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  HOME
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/collections"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  COLLECTIONS
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/stories"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  STORIES
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  ABOUT US
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Help Column */}
-          <div>
-            <h3
-              className="text-sm uppercase mb-4"
-              style={{
-                color: 'var(--ivory-archive)',
-                letterSpacing: '0.1em',
-                fontWeight: 600,
-              }}
-            >
-              Help
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/shipping-policy"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  Shipping Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/returns"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  Returns & Exchanges
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/faq"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  Contact Us
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Learn Column */}
-          <div>
-            <h3
-              className="text-sm uppercase mb-4"
-              style={{
-                color: 'var(--ivory-archive)',
-                letterSpacing: '0.1em',
-                fontWeight: 600,
-              }}
-            >
-              Learn
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/gift-guides"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  Gift Guides
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/decor-tips"
-                  className="text-sm hover:opacity-70 transition-opacity"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
-                  }}
-                >
-                  Decor Tips
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Divider */}
+    <footer className="w-full">
+      {/* Part 1: Main Footer Navigation - Heritage Green Background */}
+      <div
+        className="w-full"
+        style={{
+          backgroundColor: 'var(--heritage-green)',
+        }}
+      >
         <div
-          className="border-t mb-8"
+          className="w-full mx-auto"
           style={{
-            borderColor: 'rgba(253, 246, 227, 0.2)',
-          }}
-        ></div>
-
-        {/* Copyright */}
-        <p
-          className="text-sm text-center"
-          style={{
-            color: 'var(--ivory-archive)',
-            opacity: 0.6,
+            maxWidth: '120rem',
+            paddingBlock: 'clamp(4.5rem, 8vw, 8rem)',
+            paddingInline: 'clamp(1.5rem, 6vw, 7rem)',
           }}
         >
-          © 2026 ShilpaKale. All rights reserved.
-        </p>
+          {/* Four Column Grid */}
+          <div
+            className="footer-grid"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+              gap: 'clamp(2.5rem, 6vw, 7rem)',
+            }}
+          >
+            {footerColumns.map((column) => (
+              <div key={column.heading}>
+                {/* Column Heading */}
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-montserrat)',
+                    fontSize: 'clamp(0.72rem, 0.9vw, 0.88rem)',
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                    color: 'var(--ivory-archive)',
+                    fontWeight: 500,
+                    lineHeight: 1.2,
+                    marginBottom: '1.75rem',
+                  }}
+                >
+                  {column.heading}
+                </h3>
+
+                {/* Column Links */}
+                <ul
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '1rem',
+                  }}
+                >
+                  {column.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="footer-link"
+                        style={{
+                          position: 'relative',
+                          display: 'inline-flex',
+                          fontFamily: 'var(--font-montserrat)',
+                          fontSize: 'clamp(0.82rem, 0.95vw, 0.92rem)',
+                          color: 'var(--ivory-archive)',
+                          textDecoration: 'none',
+                          opacity: 0.85,
+                          transition: 'opacity 280ms ease',
+                        }}
+                        {...(link.external && {
+                          target: '_blank',
+                          rel: 'noopener noreferrer',
+                        })}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+      {/* Part 2: Bottom Brand Area - Ivory Archive Background */}
+      <div
+        className="w-full"
+        style={{
+          backgroundColor: 'var(--ivory-archive)',
+        }}
+      >
+        <div
+          className="w-full mx-auto text-center"
+          style={{
+            maxWidth: '120rem',
+            paddingBlock: 'clamp(3.5rem, 7vw, 6rem)',
+            paddingInline: '1.5rem',
+          }}
+        >
+          {/* SHILPAKALE Wordmark */}
+          <h2
+            style={{
+              fontFamily: 'var(--font-wordmark)',
+              fontSize: 'clamp(2rem, 4vw, 4.5rem)',
+              letterSpacing: 'clamp(0.12em, 0.35vw, 0.22em)',
+              textTransform: 'uppercase',
+              color: 'var(--heritage-green)',
+              lineHeight: 1,
+              marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+            }}
+          >
+            SHILPAKALE
+          </h2>
+
+          {/* Tagline */}
+          <p
+            style={{
+              fontFamily: 'var(--font-montserrat)',
+              fontSize: 'clamp(0.65rem, 0.9vw, 0.85rem)',
+              letterSpacing: 'clamp(0.13em, 0.3vw, 0.22em)',
+              textTransform: 'uppercase',
+              color: 'var(--heritage-green)',
+              whiteSpace: 'nowrap',
+              marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+            }}
+          >
+            TRACING ROOTS. SHAPING FORMS.
+          </p>
+
+          {/* Copyright */}
+          <p
+            style={{
+              fontFamily: 'var(--font-montserrat)',
+              fontSize: 'clamp(0.65rem, 0.8vw, 0.78rem)',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: 'var(--heritage-green)',
+              opacity: 0.7,
+            }}
+          >
+            © 2026 SHILPAKALE. ALL RIGHTS RESERVED.
+          </p>
+        </div>
+      </div>
+
+      {/* Footer Link Hover Effect - Respects prefers-reduced-motion */}
+      <style>{`
+        .footer-link::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -0.2rem;
+          height: 1px;
+          background: currentColor;
+          transform: scaleX(0);
+          transform-origin: right center;
+          transition: transform 280ms ease;
+        }
+
+        .footer-link:hover::after,
+        .footer-link:focus-visible::after {
+          transform: scaleX(1);
+          transform-origin: left center;
+        }
+
+        .footer-link:hover {
+          opacity: 1;
+        }
+
+        /* Responsive Grid */
+        @media (max-width: 1024px) {
+          .footer-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: clamp(2.5rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem) !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .footer-grid {
+            grid-template-columns: 1fr !important;
+            gap: clamp(2.5rem, 6vw, 3rem) !important;
+          }
+        }
+
+        /* Respect prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+          .footer-link::after {
+            transition: none;
+          }
+          
+          .footer-link {
+            transition: none;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

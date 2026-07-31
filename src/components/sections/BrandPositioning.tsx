@@ -1,116 +1,50 @@
-const cards = [
-  {
-    number: '01',
-    title: 'Trace the Root',
-    body: 'Every object starts as a system, material, route, ritual, or built intelligence — researched at the source, not invented.',
-  },
-  {
-    number: '02',
-    title: 'Reveal the Connection',
-    body: 'The root is studied against the present — what it explains, what it still shapes, and why it still matters.',
-  },
-  {
-    number: '03',
-    title: 'Shape the Object',
-    body: 'The research is translated into a physical form — precise, collectible, and built to be kept.',
-  },
-];
-
 export default function BrandPositioning() {
   return (
     <section
-      className="w-full bg-[var(--ivory-archive)] py-20 md:py-28"
-      style={{ minHeight: '75svh' }}
+      className="w-full bg-[var(--ivory-archive)]"
+      style={{
+        paddingBlock: 'clamp(5rem, 10vw, 9rem)',
+        paddingInline: 'clamp(1.5rem, 6vw, 6rem)',
+      }}
+      aria-labelledby="brand-position-heading"
     >
-      <div className="max-w-7xl mx-auto px-[5vw]">
-        {/* Heading Block */}
-        <div className="mb-16 md:mb-20 max-w-3xl">
-          {/* Eyebrow */}
-          <p
-            className="text-xs md:text-sm uppercase mb-4 md:mb-6"
-            style={{
-              color: 'var(--heritage-green)',
-              letterSpacing: '0.2em',
-            }}
-          >
-            BRAND POSITIONING
-          </p>
+      <div
+        style={{
+          maxWidth: '78rem',
+          marginInline: 'auto',
+        }}
+      >
+        {/* Section Label */}
+        <p
+          id="brand-position-heading"
+          className="uppercase"
+          style={{
+            color: 'var(--heritage-green)',
+            fontSize: 'clamp(0.72rem, 0.9vw, 0.9rem)',
+            letterSpacing: '0.22em',
+            lineHeight: 1.2,
+            marginBottom: 'clamp(2rem, 4vw, 3.5rem)',
+            textAlign: 'center',
+          }}
+        >
+          BRAND POSITION
+        </p>
 
-          {/* Main Heading */}
-          <h2
-            className="text-3xl md:text-5xl lg:text-6xl mb-4 md:mb-6"
-            style={{
-              color: 'var(--heritage-green)',
-              fontFamily: 'Georgia, serif',
-              fontWeight: 400,
-              lineHeight: 1.2,
-            }}
-          >
-            Not souvenirs. Physical archives.
-          </h2>
-
-          {/* Supporting Paragraph */}
-          <p
-            className="text-base md:text-lg"
-            style={{
-              color: 'var(--heritage-green)',
-              opacity: 0.75,
-              lineHeight: 1.6,
-            }}
-          >
-            Shilpakale does not make generic decor or low-ticket keepsakes. Each object begins with a root: a system, a material, a route, a ritual, or a built intelligence. The story is studied, connected to the present, and then shaped into a collectible form.
-          </p>
-        </div>
-
-        {/* Three-Column Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
-          {cards.map((card) => (
-            <div
-              key={card.number}
-              className="border pt-8 pb-10 px-6 md:px-8"
-              style={{
-                borderColor: 'rgba(11, 58, 47, 0.15)',
-              }}
-            >
-              {/* Card Number */}
-              <p
-                className="text-xs uppercase mb-4"
-                style={{
-                  color: 'var(--heritage-green)',
-                  letterSpacing: '0.2em',
-                  opacity: 0.5,
-                }}
-              >
-                {card.number}
-              </p>
-
-              {/* Card Title */}
-              <h3
-                className="text-xl md:text-2xl mb-4"
-                style={{
-                  color: 'var(--heritage-green)',
-                  fontFamily: 'Georgia, serif',
-                  fontWeight: 400,
-                  lineHeight: 1.3,
-                }}
-              >
-                {card.title}
-              </h3>
-
-              {/* Card Body */}
-              <p
-                className="text-sm md:text-base"
-                style={{
-                  color: 'var(--heritage-green)',
-                  opacity: 0.7,
-                  lineHeight: 1.7,
-                }}
-              >
-                {card.body}
-              </p>
-            </div>
-          ))}
-        </div>
+        {/* Brand Positioning Statement */}
+        <p
+          style={{
+            color: 'var(--heritage-green)',
+            fontFamily: 'Georgia, serif',
+            fontSize: 'clamp(1.75rem, 3vw, 3.5rem)',
+            lineHeight: 1.22,
+            letterSpacing: '-0.01em',
+            maxWidth: '56rem',
+            marginInline: 'auto',
+            textAlign: 'center',
+          }}
+        >
+          SHILPAKALE traces the intelligence embedded in places, materials, systems, and traditions. Each object begins with research and is shaped through evidence, context, and present relevance. The result is not generic décor, but a considered physical archive. Every form is designed to preserve a story with precision, restraint, and permanence. Together, these objects create a collectible record of ideas that continue to shape the present. SHILPAKALE exists to turn researched narratives into forms worthy of being kept.
+        </p>
       </div>
     </section>
   );

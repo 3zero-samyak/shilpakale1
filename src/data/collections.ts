@@ -102,7 +102,7 @@ export const products: Product[] = [
       'Carved stone reveals how light becomes architecture. This object documents the deliberate manipulation of relief depth to create shadow patterns that shift with the sun — a technique mastered in South Indian temple construction where sculptural form doubled as time-keeping device.',
     material: 'Cast stone composite with natural aggregate',
     dimensions: '240mm × 180mm × 45mm',
-    storyUrl: '/stories/light-in-stone',
+    storyUrl: '/stories/the-temple-that-measured-light',
     story: {
       eyebrow: 'ARCHITECTURAL INTELLIGENCE',
       title: 'Light in Stone',
@@ -141,7 +141,7 @@ export const products: Product[] = [
       'Rock-cut architecture reverses construction logic. Rather than building up, it removes stone to reveal space. This piece traces the engineering precision required to excavate monolithic structures from living rock — a tradition spanning Ajanta, Ellora, and Kailasa.',
     material: 'Sandstone with hand-carved detail',
     dimensions: '200mm × 200mm × 60mm',
-    storyUrl: '/stories/the-subtractive-temple',
+    storyUrl: '/stories/the-mountain-released-into-form',
     story: {
       eyebrow: 'SUBTRACTIVE ARCHITECTURE',
       title: 'The Subtractive Temple',
@@ -180,7 +180,7 @@ export const products: Product[] = [
       'Certain architectural traditions achieved structural impossibilities through precise geometry and hidden counterweights. This object reveals the engineering intelligence behind seemingly gravity-defying cantilevers and suspended platforms — where physics masqueraded as spectacle.',
     material: 'Brass with oxidized patina',
     dimensions: '180mm × 120mm × 80mm',
-    storyUrl: '/stories/the-floating-illusion',
+    storyUrl: '/stories/the-palace-that-became-a-ship',
     story: {
       eyebrow: 'STRUCTURAL ILLUSION',
       title: 'The Floating Illusion',
@@ -219,7 +219,7 @@ export const products: Product[] = [
       'Hill forts transformed landscape into military infrastructure. Strategic positioning on elevated terrain created defensive advantages that required minimal fortification. This piece maps how geography itself became a weapon — dictating empire boundaries and war outcomes.',
     material: 'Terracotta with relief topography',
     dimensions: '280mm × 200mm × 40mm',
-    storyUrl: '/stories/terrain-of-resistance',
+    storyUrl: '/stories/the-mountain-that-became-a-defence-system',
     story: {
       eyebrow: 'DEFENSIVE GEOGRAPHY',
       title: 'Terrain of Resistance',
@@ -258,7 +258,7 @@ export const products: Product[] = [
       'Maritime trade routes were not discovered — they were built through navigational knowledge, monsoon science, and port infrastructure. This object traces how control over these routes determined which kingdoms rose and which declined.',
     material: 'Composite with embedded copper route lines',
     dimensions: '320mm × 240mm × 30mm',
-    storyUrl: '/stories/ports-routes-power',
+    storyUrl: '/stories/when-the-sea-became-a-route-of-power',
     story: {
       eyebrow: 'MARITIME NETWORKS',
       title: 'Ports, Routes, Power',
@@ -287,7 +287,7 @@ export const products: Product[] = [
     },
   },
   {
-    id: 'stone-river-empire',
+    id: 'stone-river-and-empire',
     name: 'Stone, River & Empire',
     description: 'How materials moved through history',
     category: 'Material',
@@ -297,7 +297,7 @@ export const products: Product[] = [
       'Monumental construction required supply chains. Granite quarries, river transport networks, and labor coordination systems moved millions of tons of stone across regions. This piece documents the material logistics that made empires physically possible.',
     material: 'Layered stone with river-worn texture',
     dimensions: '260mm × 180mm × 50mm',
-    storyUrl: '/stories/stone-river-empire',
+    storyUrl: '/stories/stone-river-and-empire',
     story: {
       eyebrow: 'MATERIAL LOGISTICS',
       title: 'Stone, River & Empire',
@@ -336,7 +336,7 @@ export const products: Product[] = [
       'Athangudi tiles preserve a 19th-century floor-making tradition from Tamil Nadu. Each pattern encodes regional motifs, color-mixing knowledge, and application techniques passed down through families. This object honors a craft lineage still practiced today.',
     material: 'Cement composite tile with traditional pigments',
     dimensions: '200mm × 200mm × 18mm',
-    storyUrl: '/stories/the-chettinad-floor-archive',
+    storyUrl: '/stories/the-floor-that-became-a-tabletop-archive',
     story: {
       eyebrow: 'LIVING CRAFT TRADITION',
       title: 'The Chettinad Floor Archive',
@@ -375,7 +375,7 @@ export const products: Product[] = [
       'Stepwells combined hydraulic engineering with ritual architecture. Descending into the earth to reach water became a choreographed spiritual experience. This piece explores how functional infrastructure doubled as sacred space through geometric precision.',
     material: 'Stone with carved stepwell geometry',
     dimensions: '220mm × 220mm × 70mm',
-    storyUrl: '/stories/the-four-faces-of-water',
+    storyUrl: '/stories/water-held-below-the-earth',
     story: {
       eyebrow: 'RITUAL INFRASTRUCTURE',
       title: 'The Four Faces of Water',
@@ -414,7 +414,7 @@ export const products: Product[] = [
       'Water clocks achieved remarkable accuracy before mechanical horology. The Ghatika Yantra measured time through controlled water flow, calibrated to astronomical observations. This object represents the intersection of hydraulics, astronomy, and ritual timekeeping.',
     material: 'Brass with water-flow calibration marks',
     dimensions: '160mm diameter × 140mm height',
-    storyUrl: '/stories/the-ghatika-yantra',
+    storyUrl: '/stories/time-measured-by-water',
     story: {
       eyebrow: 'HYDRAULIC TIMEKEEPING',
       title: 'The Ghatika Yantra',

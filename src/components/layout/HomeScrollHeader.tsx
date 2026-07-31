@@ -3,10 +3,12 @@
 import { useState, useLayoutEffect } from 'react';
 import Link from 'next/link';
 import CompactNavigation from './CompactNavigation';
+import ProductSearchOverlay from '../search/ProductSearchOverlay';
 
 export default function HomeScrollHeader() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useLayoutEffect(() => {
     const masthead = document.getElementById('site-masthead');
@@ -37,6 +39,14 @@ export default function HomeScrollHeader() {
 
   const handleMenuClose = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleSearchToggle = () => {
+    setIsSearchOpen((prev) => !prev);
+  };
+
+  const handleSearchClose = () => {
+    setIsSearchOpen(false);
   };
 
   return (
@@ -135,16 +145,51 @@ export default function HomeScrollHeader() {
             SHILPAKALE
           </Link>
 
-          {/* Right: ENQUIRE */}
-          <div className="flex items-center justify-end">
-            <Link
-              href="/contact"
-              className="header-nav-link text-[var(--ivory-archive)] text-sm uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)]"
-              style={{
-                letterSpacing: '0.1em',
-              }}
+          {/* Right: Search and Profile */}
+          <div className="flex items-center justify-end gap-2">
+            {/* Search Button */}
+            <button
+              type="button"
+              onClick={handleSearchToggle}
+              aria-label="Search SHILPAKALE products"
+              className="flex items-center justify-center w-11 h-11 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
             >
-              ENQUIRE
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ color: 'var(--ivory-archive)' }}
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+            </button>
+
+            {/* Profile Button */}
+            <Link
+              href="/account"
+              aria-label="Open account options"
+              className="flex items-center justify-center w-11 h-11 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
+            >
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ color: 'var(--ivory-archive)' }}
+                aria-hidden="true"
+              >
+                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
             </Link>
           </div>
         </div>
@@ -152,6 +197,9 @@ export default function HomeScrollHeader() {
 
       {/* Compact Navigation Menu */}
       <CompactNavigation isOpen={isMenuOpen} onClose={handleMenuClose} />
+
+      {/* Product Search Overlay */}
+      <ProductSearchOverlay isOpen={isSearchOpen} onClose={handleSearchClose} />
     </>
   );
 }

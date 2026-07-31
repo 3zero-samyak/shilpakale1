@@ -4,25 +4,36 @@ import { products } from '@/data/collections';
 
 export default function FeaturedCollections() {
   return (
-    <section
-      className="w-full bg-[var(--ivory-archive)] py-20 md:py-28"
-      style={{ minHeight: '75svh' }}
-    >
-      {/* Full-Width Section Header */}
+    <section className="w-full" style={{ minHeight: '75svh' }}>
+      {/* Full-Width Heritage Green Heading Band */}
       <div
-        className="w-full pb-8 mb-12 md:mb-16 border-b"
+        className="w-full"
         style={{
           backgroundColor: 'var(--heritage-green)',
-          borderColor: 'rgba(253, 246, 227, 0.2)',
         }}
       >
-        <div className="max-w-7xl mx-auto px-[5vw] py-6 flex items-center justify-between">
+        <div
+          style={{
+            width: '100%',
+            maxWidth: '120rem',
+            marginInline: 'auto',
+            paddingInline: 'clamp(1.5rem, 5vw, 6rem)',
+            paddingBlock: 'clamp(2rem, 4vw, 3.5rem)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '2rem',
+            flexWrap: 'wrap',
+          }}
+        >
           {/* Left: Section Title */}
           <h2
-            className="text-xs md:text-sm uppercase"
+            className="uppercase"
             style={{
               color: 'var(--ivory-archive)',
-              letterSpacing: '0.2em',
+              fontSize: 'clamp(0.78rem, 1.15vw, 1.05rem)',
+              letterSpacing: 'clamp(0.14em, 0.25vw, 0.22em)',
+              lineHeight: 1.2,
             }}
           >
             FEATURED COLLECTIONS
@@ -31,10 +42,11 @@ export default function FeaturedCollections() {
           {/* Right: View Collection Link */}
           <Link
             href="/collections"
-            className="text-xs md:text-sm uppercase tracking-wider hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
+            className="featured-collections-link uppercase"
             style={{
-              color: 'var(--ivory-archive)',
-              letterSpacing: '0.15em',
+              fontSize: 'clamp(0.78rem, 1.15vw, 1.05rem)',
+              letterSpacing: 'clamp(0.14em, 0.25vw, 0.22em)',
+              lineHeight: 1.2,
             }}
           >
             VIEW COLLECTION
@@ -42,22 +54,24 @@ export default function FeaturedCollections() {
         </div>
       </div>
 
-      {/* Subtitle */}
-      <div className="max-w-7xl mx-auto px-[5vw] mb-12 md:mb-16">
-        <p
-          className="text-center text-base md:text-lg"
-          style={{
-            color: 'var(--heritage-green)',
-            fontFamily: 'Georgia, serif',
-            fontStyle: 'italic',
-          }}
-        >
-          Monuments, personalities, culture — crafted with love.
-        </p>
-      </div>
+      {/* Cream Background Section with Subtitle and Product Grid */}
+      <div className="w-full bg-[var(--ivory-archive)] py-12 md:py-16">
+        {/* Subtitle */}
+        <div className="max-w-7xl mx-auto px-[5vw] mb-12 md:mb-16">
+          <p
+            className="text-center text-base md:text-lg"
+            style={{
+              color: 'var(--heritage-green)',
+              fontFamily: 'Georgia, serif',
+              fontStyle: 'italic',
+            }}
+          >
+            Monuments, personalities, culture — crafted with love.
+          </p>
+        </div>
 
-      {/* Product Grid Container */}
-      <div className="max-w-7xl mx-auto px-[5vw]">
+        {/* Product Grid Container */}
+        <div className="max-w-7xl mx-auto px-[5vw]">
         {/* Product Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
           {/* First 8 products in 2-column grid */}
@@ -209,6 +223,7 @@ export default function FeaturedCollections() {
             </div>
           </Link>
         </div>
+      </div>
       </div>
     </section>
   );

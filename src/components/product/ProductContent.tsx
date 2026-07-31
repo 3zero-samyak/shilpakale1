@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import type { Product } from '@/data/collections';
 import StoryOverlay from './StoryOverlay';
+import { getStoryByProductHandle } from '@/data/stories';
 
 interface ProductContentProps {
   product: Product;
@@ -12,10 +13,13 @@ interface ProductContentProps {
 
 export default function ProductContent({ product, onlyStoryButton = false }: ProductContentProps) {
   const [isStoryOpen, setIsStoryOpen] = useState(false);
+  
+  // Check if story exists in shared data
+  const hasStory = !!getStoryByProductHandle(product.id);
 
   // If onlyStoryButton is true, render just the READ STORY button for hero overlay
   if (onlyStoryButton) {
-    if (!product.story) return null;
+    if (!hasStory) return null;
     
     return (
       <button
@@ -175,7 +179,7 @@ export default function ProductContent({ product, onlyStoryButton = false }: Pro
             </div>
 
             <Link
-              href="/contact?enquiry=product"
+              href={`/enquire?product=${product.id}`}
               className="inline-flex items-center justify-center md:justify-start text-sm md:text-base uppercase tracking-wider hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-2 focus:ring-offset-[var(--ivory-archive)] rounded px-6 py-3 border whitespace-nowrap"
               style={{
                 color: 'var(--heritage-green)',
