@@ -1,5 +1,8 @@
+"use client";
+
 import Link from 'next/link';
 import { footerColumns } from '@/data/footerNavigation';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 export default function Footer() {
   return (
@@ -28,8 +31,16 @@ export default function Footer() {
               gap: 'clamp(2.5rem, 6vw, 7rem)',
             }}
           >
-            {footerColumns.map((column) => (
-              <div key={column.heading}>
+            {footerColumns.map((column, index) => (
+              <ScrollReveal
+                key={column.heading}
+                direction="up"
+                distance={32}
+                duration={800}
+                delay={index * 100}
+                threshold={0.2}
+              >
+                <div>
                 {/* Column Heading */}
                 <h3
                   style={{
@@ -80,6 +91,7 @@ export default function Footer() {
                   ))}
                 </ul>
               </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -101,48 +113,54 @@ export default function Footer() {
           }}
         >
           {/* SHILPAKALE Wordmark */}
-          <h2
-            style={{
-              fontFamily: 'var(--font-wordmark)',
-              fontSize: 'clamp(2rem, 4vw, 4.5rem)',
-              letterSpacing: 'clamp(0.12em, 0.35vw, 0.22em)',
-              textTransform: 'uppercase',
-              color: 'var(--heritage-green)',
-              lineHeight: 1,
-              marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
-            }}
-          >
-            SHILPAKALE
-          </h2>
+          <ScrollReveal direction="up" distance={28} duration={800} delay={400}>
+            <h2
+              style={{
+                fontFamily: 'var(--font-wordmark)',
+                fontSize: 'clamp(2rem, 4vw, 4.5rem)',
+                letterSpacing: 'clamp(0.12em, 0.35vw, 0.22em)',
+                textTransform: 'uppercase',
+                color: 'var(--heritage-green)',
+                lineHeight: 1,
+                marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+              }}
+            >
+              SHILPAKALE
+            </h2>
+          </ScrollReveal>
 
           {/* Tagline */}
-          <p
-            style={{
-              fontFamily: 'var(--font-montserrat)',
-              fontSize: 'clamp(0.65rem, 0.9vw, 0.85rem)',
-              letterSpacing: 'clamp(0.13em, 0.3vw, 0.22em)',
-              textTransform: 'uppercase',
-              color: 'var(--heritage-green)',
-              whiteSpace: 'nowrap',
-              marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
-            }}
-          >
-            TRACING ROOTS. SHAPING FORMS.
-          </p>
+          <ScrollReveal direction="up" distance={24} duration={800} delay={520}>
+            <p
+              style={{
+                fontFamily: 'var(--font-montserrat)',
+                fontSize: 'clamp(0.65rem, 0.9vw, 0.85rem)',
+                letterSpacing: 'clamp(0.13em, 0.3vw, 0.22em)',
+                textTransform: 'uppercase',
+                color: 'var(--heritage-green)',
+                whiteSpace: 'nowrap',
+                marginBottom: 'clamp(1.5rem, 3vw, 2rem)',
+              }}
+            >
+              TRACING ROOTS. SHAPING FORMS.
+            </p>
+          </ScrollReveal>
 
           {/* Copyright */}
-          <p
-            style={{
-              fontFamily: 'var(--font-montserrat)',
-              fontSize: 'clamp(0.65rem, 0.8vw, 0.78rem)',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: 'var(--heritage-green)',
-              opacity: 0.7,
-            }}
-          >
-            © 2026 SHILPAKALE. ALL RIGHTS RESERVED.
-          </p>
+          <ScrollReveal direction="none" duration={800} delay={640}>
+            <p
+              style={{
+                fontFamily: 'var(--font-montserrat)',
+                fontSize: 'clamp(0.65rem, 0.8vw, 0.78rem)',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: 'var(--heritage-green)',
+                opacity: 0.7,
+              }}
+            >
+              © 2026 SHILPAKALE. ALL RIGHTS RESERVED.
+            </p>
+          </ScrollReveal>
         </div>
       </div>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { collectiveSpreads } from '@/data/collectiveQuotes';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 type ManuscriptState = 'closed' | 'opening' | 'open';
 type TurnDirection = 'forward' | 'backward';
@@ -570,24 +571,25 @@ export default function CollectivesManuscript() {
   );
 
   return (
-    <section
-      ref={sectionRef}
-      aria-labelledby="collectives-title"
-      aria-roledescription="carousel"
-      style={{
-        backgroundColor: 'var(--ivory-archive)',
-        minHeight: '100svh',
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        paddingBlock: 'clamp(5rem, 9vw, 9rem)',
-        paddingInline: 'clamp(1rem, 4vw, 4rem)',
-      }}
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
+    <ScrollReveal direction="up" distance={20} duration={900} threshold={0.2}>
+      <section
+        ref={sectionRef}
+        aria-labelledby="collectives-title"
+        aria-roledescription="carousel"
+        style={{
+          backgroundColor: 'var(--ivory-archive)',
+          minHeight: '100svh',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          paddingBlock: 'clamp(5rem, 9vw, 9rem)',
+          paddingInline: 'clamp(1rem, 4vw, 4rem)',
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
       {/* Live region for accessibility */}
       <div
         className="sr-only"
@@ -1185,6 +1187,7 @@ export default function CollectivesManuscript() {
           }
         }
       `}</style>
-    </section>
+      </section>
+    </ScrollReveal>
   );
 }

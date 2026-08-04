@@ -70,7 +70,7 @@ export default function ProductPageHeader() {
               aria-expanded={isMenuOpen}
               aria-controls="compact-navigation-menu"
               aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'}
-              className="flex flex-col items-center justify-center gap-1.5 w-11 h-11 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
+              className="flex flex-col items-center justify-center gap-1.5 w-11 h-11 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded compact-menu-toggle"
             >
               {isMenuOpen ? (
                 // Close icon (X)
@@ -89,38 +89,15 @@ export default function ProductPageHeader() {
                   <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
               ) : (
-                // Bulleted list style menu
-                <div className="flex flex-col gap-1.5">
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                    <span
-                      className="w-4 h-0.5 transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                    <span
-                      className="w-4 h-0.5 transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                    <span
-                      className="w-4 h-0.5 transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                  </div>
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <span
+                    className="w-5 h-1.5 rounded transition-all"
+                    style={{ backgroundColor: 'var(--ivory-archive)' }}
+                  />
+                  <span
+                    className="w-5 h-1.5 rounded transition-all"
+                    style={{ backgroundColor: 'var(--ivory-archive)' }}
+                  />
                 </div>
               )}
             </button>

@@ -77,12 +77,12 @@ export default function HomeScrollHeader() {
               aria-expanded={isMenuOpen}
               aria-controls="compact-navigation-menu"
               aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'}
-              className="flex flex-col items-center justify-center gap-1.5 w-11 h-11 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
+              className="flex flex-col items-center justify-center gap-1 w-9 h-9 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded compact-menu-toggle"
             >
               {isMenuOpen ? (
                 // Close icon (X)
                 <svg
-                  className="w-6 h-6"
+                  className="w-5 h-5"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -96,38 +96,15 @@ export default function HomeScrollHeader() {
                   <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
               ) : (
-                // Bulleted list style menu
-                <div className="flex flex-col gap-1.5">
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                    <span
-                      className="w-4 h-0.5 transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                    <span
-                      className="w-4 h-0.5 transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                    <span
-                      className="w-4 h-0.5 transition-all"
-                      style={{ backgroundColor: 'var(--ivory-archive)' }}
-                    />
-                  </div>
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <span
+                    className="w-5 h-1.5 rounded transition-all"
+                    style={{ backgroundColor: 'var(--ivory-archive)' }}
+                  />
+                  <span
+                    className="w-5 h-1.5 rounded transition-all"
+                    style={{ backgroundColor: 'var(--ivory-archive)' }}
+                  />
                 </div>
               )}
             </button>
@@ -152,10 +129,10 @@ export default function HomeScrollHeader() {
               type="button"
               onClick={handleSearchToggle}
               aria-label="Search SHILPAKALE products"
-              className="flex items-center justify-center w-11 h-11 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
+              className="flex items-center justify-center w-9 h-9 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -174,10 +151,10 @@ export default function HomeScrollHeader() {
             <Link
               href="/account"
               aria-label="Open account options"
-              className="flex items-center justify-center w-11 h-11 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
+              className="flex items-center justify-center w-9 h-9 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
             >
               <svg
-                className="w-5 h-5"
+                className="w-4 h-4"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

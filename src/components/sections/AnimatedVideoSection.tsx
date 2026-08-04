@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 export default function AnimatedVideoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -127,30 +128,32 @@ export default function AnimatedVideoSection() {
     : 'Play animated SHILPAKALE video';
 
   return (
-    <section
-      className="relative w-full bg-[var(--heritage-green)] overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--ivory-archive)] focus-visible:-outline-offset-1 min-h-[60svh] h-[60svh] md:min-h-[75svh] md:h-[75svh]"
-      onPointerEnter={handlePointerEnter}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      tabIndex={0}
-      role="button"
-      aria-label={ariaLabel}
-      style={{
-        cursor: 'pointer',
-      }}
-    >
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover"
-        autoPlay={!prefersReducedMotion}
-        muted
-        playsInline
-        loop
-        preload="auto"
-        aria-hidden="true"
+    <ScrollReveal direction="up" distance={24} duration={1000} threshold={0.2}>
+      <section
+        className="relative w-full bg-[var(--heritage-green)] overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--ivory-archive)] focus-visible:-outline-offset-1 min-h-[60svh] h-[60svh] md:min-h-[75svh] md:h-[75svh]"
+        onPointerEnter={handlePointerEnter}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+        role="button"
+        aria-label={ariaLabel}
+        style={{
+          cursor: 'pointer',
+        }}
       >
-        <source src="/images/brand/animated-video.mp4" type="video/mp4" />
-      </video>
-    </section>
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay={!prefersReducedMotion}
+          muted
+          playsInline
+          loop
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source src="/images/brand/animated-video.mp4" type="video/mp4" />
+        </video>
+      </section>
+    </ScrollReveal>
   );
 }

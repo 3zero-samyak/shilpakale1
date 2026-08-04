@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 type PhilosophyStage = {
   number: string;
@@ -202,123 +203,132 @@ export default function ProductPhilosophy() {
         }}
       >
         {/* Section Label */}
-        <p
-          className="uppercase text-center"
-          style={{
-            color: 'var(--heritage-green)',
-            fontSize: 'clamp(0.72rem, 0.9vw, 0.9rem)',
-            letterSpacing: '0.22em',
-            lineHeight: 1.2,
-          }}
-        >
-          PRODUCT PHILOSOPHY
-        </p>
+        <ScrollReveal direction="up" distance={24} duration={800} threshold={0.25}>
+          <p
+            className="uppercase text-center"
+            style={{
+              color: 'var(--heritage-green)',
+              fontSize: 'clamp(0.72rem, 0.9vw, 0.9rem)',
+              letterSpacing: '0.22em',
+              lineHeight: 1.2,
+            }}
+          >
+            PRODUCT PHILOSOPHY
+          </p>
+        </ScrollReveal>
 
         {/* Main Statement */}
         <div style={{ textAlign: 'center' }}>
-          <h2
-            style={{
-              color: 'var(--heritage-green)',
-              fontFamily: 'Georgia, serif',
-              fontSize: 'clamp(2.75rem, 5.5vw, 6rem)',
-              lineHeight: 1.02,
-              letterSpacing: '-0.02em',
-              maxWidth: '72rem',
-              marginInline: 'auto',
-              marginBottom: 'clamp(1rem, 2vw, 1.5rem)',
-            }}
-          >
-            From story to object is not enough.
-          </h2>
-          <p
-            style={{
-              color: 'var(--heritage-green)',
-              fontSize: 'clamp(1rem, 1.5vw, 1.4rem)',
-              lineHeight: 1.5,
-              opacity: 0.7,
-            }}
-          >
-            Every Shilpakale object follows a stricter path.
-          </p>
-        </div>
-
-        {/* Active Stage Content */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: 'clamp(2rem, 4vw, 3rem)',
-            alignItems: 'start',
-          }}
-          className="md:grid-cols-2"
-        >
-          {/* Active Number and Title */}
-          <div
-            style={{
-              textAlign: 'center',
-            }}
-            className="md:text-left"
-          >
-            <p
-              style={{
-                color: 'var(--heritage-green)',
-                fontSize: 'clamp(0.85rem, 1vw, 1rem)',
-                letterSpacing: '0.15em',
-                marginBottom: '1rem',
-                opacity: 0.6,
-              }}
-            >
-              {activeStage.number}
-            </p>
-            <h3
-              key={`title-${activeIndex}`}
+          <ScrollReveal direction="up" distance={32} duration={800} delay={100} threshold={0.25}>
+            <h2
               style={{
                 color: 'var(--heritage-green)',
                 fontFamily: 'Georgia, serif',
-                fontSize: 'clamp(2rem, 3.5vw, 3.5rem)',
-                lineHeight: 1.1,
-                letterSpacing: '-0.01em',
-                animation: prefersReducedMotion ? 'none' : 'fadeInUp 500ms ease-out',
+                fontSize: 'clamp(2.75rem, 5.5vw, 6rem)',
+                lineHeight: 1.02,
+                letterSpacing: '-0.02em',
+                maxWidth: '72rem',
+                marginInline: 'auto',
+                marginBottom: 'clamp(1rem, 2vw, 1.5rem)',
               }}
             >
-              {activeStage.title}
-            </h3>
-          </div>
-
-          {/* Active Description */}
-          <div
-            style={{
-              textAlign: 'center',
-            }}
-            className="md:text-left"
-          >
+              From story to object is not enough.
+            </h2>
+          </ScrollReveal>
+          <ScrollReveal direction="up" distance={28} duration={800} delay={200} threshold={0.25}>
             <p
-              key={`desc-${activeIndex}`}
               style={{
                 color: 'var(--heritage-green)',
-                fontSize: 'clamp(1rem, 1.2vw, 1.15rem)',
-                lineHeight: 1.7,
-                maxWidth: '44rem',
-                opacity: 0.8,
-                animation: prefersReducedMotion ? 'none' : 'fadeInUp 500ms ease-out 100ms',
-                marginInline: 'auto',
+                fontSize: 'clamp(1rem, 1.5vw, 1.4rem)',
+                lineHeight: 1.5,
+                opacity: 0.7,
               }}
-              className="md:ml-0"
             >
-              {activeStage.description}
+              Every Shilpakale object follows a stricter path.
             </p>
-          </div>
+          </ScrollReveal>
         </div>
 
+        {/* Active Stage Content */}
+        <ScrollReveal direction="up" distance={36} duration={800} delay={300} threshold={0.25}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr',
+              gap: 'clamp(2rem, 4vw, 3rem)',
+              alignItems: 'start',
+            }}
+            className="md:grid-cols-2"
+          >
+            {/* Active Number and Title */}
+            <div
+              style={{
+                textAlign: 'center',
+              }}
+              className="md:text-left"
+            >
+              <p
+                style={{
+                  color: 'var(--heritage-green)',
+                  fontSize: 'clamp(0.85rem, 1vw, 1rem)',
+                  letterSpacing: '0.15em',
+                  marginBottom: '1rem',
+                  opacity: 0.6,
+                }}
+              >
+                {activeStage.number}
+              </p>
+              <h3
+                key={`title-${activeIndex}`}
+                style={{
+                  color: 'var(--heritage-green)',
+                  fontFamily: 'Georgia, serif',
+                  fontSize: 'clamp(2rem, 3.5vw, 3.5rem)',
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.01em',
+                  animation: prefersReducedMotion ? 'none' : 'fadeInUp 500ms ease-out',
+                }}
+              >
+                {activeStage.title}
+              </h3>
+            </div>
+
+            {/* Active Description */}
+            <div
+              style={{
+                textAlign: 'center',
+              }}
+              className="md:text-left"
+            >
+              <p
+                key={`desc-${activeIndex}`}
+                style={{
+                  color: 'var(--heritage-green)',
+                  fontSize: 'clamp(1rem, 1.2vw, 1.15rem)',
+                  lineHeight: 1.7,
+                  maxWidth: '44rem',
+                  opacity: 0.8,
+                  animation: prefersReducedMotion ? 'none' : 'fadeInUp 500ms ease-out 100ms',
+                  marginInline: 'auto',
+                }}
+                className="md:ml-0"
+              >
+                {activeStage.description}
+              </p>
+            </div>
+          </div>
+        </ScrollReveal>
+
         {/* Numbered Navigation */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1.5rem',
-          }}
-        >
+        <ScrollReveal direction="up" distance={32} duration={800} delay={400} threshold={0.25}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '1.5rem',
+            }}
+          >
           {/* Progress Indicator */}
           {!prefersReducedMotion && (
             <div
@@ -421,7 +431,8 @@ export default function ProductPhilosophy() {
           >
             {activeStage.title}
           </p>
-        </div>
+          </div>
+        </ScrollReveal>
       </div>
 
       {/* CSS Animations */}
