@@ -70,6 +70,8 @@ export interface Product {
   id: string;
   name: string;
   description: string;
+  sourceName?: string;
+  productType?: string;
   category: string;
   image: string;
   collectionId: string;
@@ -94,7 +96,9 @@ export const products: Product[] = [
   {
     id: 'light-in-stone',
     name: 'Light in Stone',
-    description: 'A study of carved relief and shadow',
+    description: 'Architecture shaped through shadow and sacred geometry.',
+    sourceName: 'Vidyashankara Temple, Sringeri',
+    productType: 'Architecture Model',
     category: 'Architecture',
     image: '/images/brand/a.jpeg',
     collectionId: 'architectures-of-intelligence',
@@ -133,7 +137,9 @@ export const products: Product[] = [
   {
     id: 'the-subtractive-temple',
     name: 'The Subtractive Temple',
-    description: 'Form through absence and excavation',
+    description: 'A monument imagined through excavation rather than construction.',
+    sourceName: 'Kailash Temple, Ellora',
+    productType: 'Architecture Model',
     category: 'Architecture',
     image: '/images/brand/b.jpeg',
     collectionId: 'architectures-of-intelligence',
@@ -172,8 +178,10 @@ export const products: Product[] = [
   {
     id: 'the-floating-illusion',
     name: 'The Floating Illusion',
-    description: 'Engineering disguised as magic',
-    category: 'Engineering',
+    description: 'Architecture suspended between reflection, water and memory.',
+    sourceName: 'Jahaz Mahal, Mandu',
+    productType: 'Architecture Model',
+    category: 'Architecture',
     image: '/images/brand/c.jpeg',
     collectionId: 'architectures-of-intelligence',
     longDescription:
@@ -211,8 +219,10 @@ export const products: Product[] = [
   {
     id: 'terrain-of-resistance',
     name: 'Terrain of Resistance',
-    description: 'Geography as strategic defense',
-    category: 'History',
+    description: 'The Sahyadri landscape translated into defensive geography.',
+    sourceName: 'The Sahyadri Wall / Maratha Military Landscapes',
+    productType: 'Topographical Shadow Box',
+    category: 'Landscape',
     image: '/images/brand/d.jpeg',
     collectionId: 'landscapes-of-power',
     longDescription:
@@ -250,7 +260,9 @@ export const products: Product[] = [
   {
     id: 'ports-routes-power',
     name: 'Ports, Routes, Power',
-    description: 'Trade networks that shaped empires',
+    description: 'Maritime movement, trade and influence mapped into physical form.',
+    sourceName: 'The Chola Maritime Network',
+    productType: 'Maritime Shadow Box',
     category: 'Trade',
     image: '/images/brand/e.jpeg',
     collectionId: 'landscapes-of-power',
@@ -289,10 +301,12 @@ export const products: Product[] = [
   {
     id: 'stone-river-and-empire',
     name: 'Stone, River & Empire',
-    description: 'How materials moved through history',
-    category: 'Material',
+    description: 'The Vijayanagara landscape interpreted through terrain and architecture.',
+    sourceName: 'Hampi-Vijayanagara Landscape',
+    productType: 'Topographical Shadow Box',
+    category: 'Landscape',
     image: '/images/brand/f.jpeg',
-    collectionId: 'matter-and-making',
+    collectionId: 'landscapes-of-power',
     longDescription:
       'Monumental construction required supply chains. Granite quarries, river transport networks, and labor coordination systems moved millions of tons of stone across regions. This piece documents the material logistics that made empires physically possible.',
     material: 'Layered stone with river-worn texture',
@@ -328,7 +342,9 @@ export const products: Product[] = [
   {
     id: 'the-chettinad-floor-archive',
     name: 'The Chettinad Floor Archive',
-    description: 'Pattern as cultural memory',
+    description: 'Pattern, craft and material memory preserved through functional objects.',
+    sourceName: 'Athangudi Tile Visual Grammar',
+    productType: 'Coaster + Tray Set',
     category: 'Design',
     image: '/images/brand/g.jpeg',
     collectionId: 'living-lineages',
@@ -367,7 +383,9 @@ export const products: Product[] = [
   {
     id: 'the-four-faces-of-water',
     name: 'The Four Faces of Water',
-    description: 'Sacred geometry in utility',
+    description: 'Stepwell geometry reinterpreted through an everyday functional form.',
+    sourceName: 'Stepwell Water Architecture',
+    productType: 'Kitchen Cutlery Holder',
     category: 'Ritual',
     image: '/images/brand/h.jpeg',
     collectionId: 'living-lineages',
@@ -406,7 +424,9 @@ export const products: Product[] = [
   {
     id: 'the-ghatika-yantra',
     name: 'The Ghatika Yantra',
-    description: 'Ancient precision in measuring time',
+    description: 'An interpretation of India\'s historic water-clock tradition.',
+    sourceName: 'Indian Water-Clock Tradition',
+    productType: 'Circular Tray',
     category: 'Science',
     image: '/images/brand/i.jpeg',
     collectionId: 'measures-of-time-and-cosmos',

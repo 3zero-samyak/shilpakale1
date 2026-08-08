@@ -84,83 +84,49 @@ export default function FeaturedCollections() {
           {/* Product Grid */}
           <div className="featured-products-grid">
             {products.slice(0, 9).map((product, index) => {
-              // Calculate row-based delay: each row reveals together or with slight stagger
-              const rowIndex = Math.floor(index / 2);
-              const colIndex = index % 2;
-              const baseDelay = rowIndex * 180;
-              const staggerDelay = colIndex * 120;
-              const totalDelay = baseDelay + staggerDelay;
+              // Assign masonry position classes based on index
+              const positionClass = `featured-product-card-wrapper--pos-${index + 1}`;
 
               return (
                 <ScrollReveal
                   key={product.id}
                   direction="up"
-                  distance={36}
+                  distance={28}
                   duration={800}
-                  delay={totalDelay}
+                  delay={index * 70}
                   threshold={0.15}
-                  className={index === 8 ? 'featured-product-card-wrapper--wide' : ''}
+                  className={positionClass}
                 >
-                  <div className="featured-product-card-container">
-                    <Link
-                      href={`/products/${product.id}`}
-                      className="featured-product-card group"
-                    >
-                      {/* Image with Overlay Text */}
-                      <div className="featured-product-card__image">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, (max-width: 800px) 100vw, 50vw"
-                          style={{
-                            transition: 'transform 700ms cubic-bezier(0.22, 1, 0.36, 1)',
-                          }}
-                        />
+                  <Link
+                    href={`/products/${product.id}`}
+                    className="featured-product-card group"
+                  >
+                    {/* Image with Overlay Text */}
+                    <div className="featured-product-card__image">
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      
+                      {/* Text Overlay - Lower Section */}
+                      <div className="featured-product-card__overlay">
+                        <h3 className="featured-product-card__title">
+                          {product.name}
+                        </h3>
+                        <p className="featured-product-card__description">
+                          {product.description}
+                        </p>
                         
-                        {/* Text Overlay - Lower Left */}
-                        <div className="featured-product-card__overlay">
-                          <h3
-                            style={{
-                              color: 'var(--ivory-archive)',
-                              fontFamily: 'Georgia, serif',
-                              fontSize: 'clamp(1.15rem, 1.8vw, 1.45rem)',
-                              fontWeight: 400,
-                              lineHeight: 1.2,
-                              marginBottom: 'clamp(0.5rem, 1vw, 0.75rem)',
-                            }}
-                          >
-                            {product.name}
-                          </h3>
-                          <p
-                            style={{
-                              color: 'var(--ivory-archive)',
-                              fontSize: 'clamp(0.85rem, 1.05vw, 0.95rem)',
-                              lineHeight: 1.5,
-                              opacity: 0.88,
-                            }}
-                          >
-                            {product.description}
-                          </p>
+                        {/* Discover Link */}
+                        <div className="featured-product-card__discover">
+                          <span>DISCOVER →</span>
                         </div>
                       </div>
-                    </Link>
-
-                    {/* Discover Link Below Card */}
-                    <div className="featured-product-card__discover">
-                      <span
-                        style={{
-                          color: 'var(--heritage-green)',
-                          fontSize: 'clamp(0.72rem, 0.9vw, 0.85rem)',
-                          letterSpacing: '0.12em',
-                          textTransform: 'uppercase',
-                        }}
-                      >
-                        DISCOVER →
-                      </span>
                     </div>
-                  </div>
+                  </Link>
                 </ScrollReveal>
               );
             })}
