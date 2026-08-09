@@ -84,9 +84,6 @@ export default function FeaturedCollections() {
           {/* Product Grid */}
           <div className="featured-products-grid">
             {products.slice(0, 9).map((product, index) => {
-              // Assign masonry position classes based on index
-              const positionClass = `featured-product-card-wrapper--pos-${index + 1}`;
-
               return (
                 <ScrollReveal
                   key={product.id}
@@ -95,7 +92,7 @@ export default function FeaturedCollections() {
                   duration={800}
                   delay={index * 70}
                   threshold={0.15}
-                  className={positionClass}
+                  className={index === 8 ? 'featured-product-grid-item--wide' : ''}
                 >
                   <Link
                     href={`/products/${product.id}`}
