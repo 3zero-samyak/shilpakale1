@@ -116,23 +116,17 @@ export default function Footer() {
         >
           {/* Approved footer artwork - uses public path /images/brand/footer.jpeg */}
           <ScrollReveal direction="up" distance={24} duration={800} delay={360}>
-            <div
-              style={{
-                position: 'relative',
-                width: '100%',
-                maxWidth: '84rem',
-                marginInline: 'auto',
-                // Use aspect-ratio so Image with fill can size correctly
-                aspectRatio: '6 / 1',
-              }}
-            >
-              <Image
-                src="/images/brand/footer.jpeg"
-                alt="SHILPAKALE — footer artwork"
-                fill
-                style={{ objectFit: 'contain' }}
-                sizes="(max-width: 640px) 100vw, 1200px"
-              />
+            <div className="footer-brand-artwork">
+              <div style={{ width: 'min(100%, 48rem)' }}>
+                <Image
+                  src="/images/brand/footer.jpeg"
+                  alt="SHILPAKALE — footer artwork"
+                  width={1200}
+                  height={200}
+                  style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                  sizes="(max-width: 640px) 100vw, 1200px"
+                />
+              </div>
             </div>
           </ScrollReveal>
         </div>

@@ -10,8 +10,10 @@
   /* Temporary fallback font for wordmark */
   --font-wordmark: var(--font-geist-sans);
   
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Force the approved light brand theme */
+  color-scheme: only light;
+  --background: #FDF6E3;
+  --foreground: #0B3A2F;
 }
 
 @theme inline {
@@ -27,12 +29,17 @@
   --font-montserrat: var(--font-montserrat);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Removed automatic dark-mode overrides to preserve brand palette on all devices */
+
+/* Ensure the document uses the approved light background and prevents horizontal overflow */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  background: var(--ivory-archive);
+  color: var(--heritage-green);
 }
+
 
 body {
   background: var(--background);
@@ -495,6 +502,51 @@ html {
 .homepage-hero-image {
   object-fit: cover;
   object-position: center center;
+}
+
+/* Mobile: ensure the full homepage artwork is visible without cropping */
+@media (max-width: 800px) {
+  .homepage-hero {
+    width: 100%;
+    min-height: 100svh;
+    background: var(--heritage-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .homepage-hero-image {
+    /* When Image uses fill, force the rendered image to contain */
+    object-fit: contain !important;
+    object-position: center center !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+/* Footer brand artwork responsive container */
+.footer-brand-artwork {
+  width: 100%;
+  background: var(--ivory-archive);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+@media (max-width: 800px) {
+  .footer-brand-artwork {
+    min-height: clamp(15rem, 55vw, 24rem);
+  }
+
+  .footer-brand-artwork img {
+    width: min(100%, 48rem);
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
 }
 
 /* Ensure sr-only content is accessible but not visible */

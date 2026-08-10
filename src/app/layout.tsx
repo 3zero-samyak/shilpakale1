@@ -35,6 +35,12 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} h-full antialiased`}
     >
+      <head>
+        {/* Communicate the site uses a light-only color scheme */}
+        <meta name="color-scheme" content="light only" />
+        <meta name="theme-color" content="#FDF6E3" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body className="min-h-full flex flex-col">
         <CinematicEntry />
         {children}
