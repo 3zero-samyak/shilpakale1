@@ -30,16 +30,45 @@ export function ScrollReveal({
   once = true,
 }: ScrollRevealProps) {
   const elementRef = useRef<HTMLDivElement>(null);
-  // Progressive enhancement: Start false for SSR, set to true on client
-  const [isEnhanced] = useState(() => {
-    // On client, enable immediately; on server, start disabled
-    return typeof window !== 'undefined';
-  });
+  // Progressive enhancement: deterministic initial state (false) for SSR and first client render
+  // Then enable enhancement after mount inside useEffect to avoid hydration mismatch.
+  const [isEnhanced, setIsEnhanced] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const element = elementRef.current;
     if (!element) return;
+
+    const timers: number[] = [];
+
+    // Defer enhancement enablement to avoid synchronous state updates during the effect
+    timers.push(
+      (setTimeout(() => {
+        setIsEnhanced(true);
+      }, 0) as unknown) as number
+    );
+
+    // Respect reduced-motion: if user prefers reduced motion, reveal immediately and skip observer
+    const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+    const prefersReduced = mq ? mq.matches : false;
+    if (prefersReduced) {
+      timers.push(((setTimeout(() => {
+        setIsVisible(true);
+      }, 0)) as unknown) as number);
+      return () => {
+        timers.forEach((t) => clearTimeout(t));
+      };
+    }
+
+    // If IntersectionObserver not supported, reveal immediately
+    if (!('IntersectionObserver' in window)) {
+      timers.push(((setTimeout(() => {
+        setIsVisible(true);
+      }, 0)) as unknown) as number);
+      return () => {
+        timers.forEach((t) => clearTimeout(t));
+      };
+    }
 
     // Check if element is already in viewport (for immediate reveals)
     const rect = element.getBoundingClientRect();
@@ -47,8 +76,12 @@ export function ScrollReveal({
     const isInitiallyVisible = rect.top < windowHeight * 0.85;
 
     if (isInitiallyVisible) {
-      setIsVisible(true);
-      return; // Don't observe if already visible
+      timers.push(((setTimeout(() => {
+        setIsVisible(true);
+      }, 0)) as unknown) as number);
+      return () => {
+        timers.forEach((t) => clearTimeout(t));
+      };
     }
 
     const observer = new IntersectionObserver(
@@ -72,6 +105,7 @@ export function ScrollReveal({
 
     return () => {
       observer.disconnect();
+      timers.forEach((t) => clearTimeout(t));
     };
   }, [once, threshold]);
 

@@ -33,7 +33,7 @@ export default function ShippingPolicyPage() {
               fontFamily: 'Georgia, serif',
               fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
               lineHeight: 1.1,
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.005em',
               color: 'var(--heritage-green)',
               fontWeight: 400,
               marginBottom: 'clamp(2rem, 4vw, 3rem)',

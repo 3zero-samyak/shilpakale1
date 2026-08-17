@@ -21,12 +21,12 @@ export default function CompactHeader() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Show compact header when masthead is NOT intersecting (scrolled out of view)
+        // Show compact header when masthead is less than 50% visible
         setIsVisible(!entry.isIntersecting);
       },
       {
-        threshold: 0,
-        rootMargin: '-1px',
+        threshold: 0.5,
+        rootMargin: '0px',
       }
     );
 
@@ -50,7 +50,7 @@ export default function CompactHeader() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all bg-[var(--heritage-green)]"
         style={{
-          height: 'clamp(3.5rem, 5vw, 4rem)',
+          height: 'clamp(5rem, 7.2vw, 6rem)',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(-0.5rem)',
           pointerEvents: isVisible ? 'auto' : 'none',
@@ -62,17 +62,17 @@ export default function CompactHeader() {
         aria-hidden={!isVisible}
       >
         <div
-          className="h-full grid items-center px-[5vw]"
+          className="h-full grid items-center px-[4.2vw]"
           style={{ gridTemplateColumns: '1fr auto 1fr' }}
         >
           {/* Left: Logo */}
           <div className="flex items-center">
-            <Link
+              <Link
               href="/"
               className="relative focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
               style={{
-                width: 'clamp(2rem, 4vw, 2.5rem)',
-                height: 'clamp(2rem, 4vw, 2.5rem)',
+                width: 'clamp(2.75rem, 5.2vw, 3.5rem)',
+                height: 'clamp(2.75rem, 5.2vw, 3.5rem)',
               }}
             >
               <Image
@@ -80,7 +80,7 @@ export default function CompactHeader() {
                 alt="SHILPAKALE Logo"
                 fill
                 className="object-contain"
-                sizes="clamp(2rem, 4vw, 2.5rem)"
+                sizes="clamp(2.75rem, 5.2vw, 3.5rem)"
               />
             </Link>
           </div>
@@ -90,7 +90,7 @@ export default function CompactHeader() {
             href="/"
             className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
             style={{
-              fontSize: 'clamp(1.05rem, 1.8vw, 1.5rem)',
+              fontSize: 'clamp(1.25rem, 2.2vw, 1.95rem)',
               letterSpacing: '0.12em',
             }}
           >
@@ -105,12 +105,13 @@ export default function CompactHeader() {
               aria-expanded={isMenuOpen}
               aria-controls="compact-navigation-menu"
               aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'}
-              className="flex flex-col items-center justify-center gap-1.5 w-11 h-11 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded compact-menu-toggle"
+              className="flex flex-col items-center justify-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded compact-menu-toggle"
+                style={{ width: 'clamp(3.25rem, 5.2vw, 3.75rem)', height: 'clamp(3.25rem, 5.2vw, 3.75rem)' }}
             >
               {isMenuOpen ? (
                 // Close icon (X)
                 <svg
-                  className="w-6 h-6"
+                    className="w-8 h-8"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -125,14 +126,14 @@ export default function CompactHeader() {
                 </svg>
               ) : (
                 <div className="flex flex-col items-center justify-center gap-1">
-                  <span
-                    className="w-5 h-1.5 rounded transition-all"
-                    style={{ backgroundColor: 'var(--ivory-archive)' }}
-                  />
-                  <span
-                    className="w-5 h-1.5 rounded transition-all"
-                    style={{ backgroundColor: 'var(--ivory-archive)' }}
-                  />
+                    <span
+                      className="w-7 h-2 rounded transition-all"
+                      style={{ backgroundColor: 'var(--ivory-archive)' }}
+                    />
+                    <span
+                      className="w-7 h-2 rounded transition-all"
+                      style={{ backgroundColor: 'var(--ivory-archive)' }}
+                    />
                 </div>
               )}
             </button>
@@ -143,7 +144,7 @@ export default function CompactHeader() {
             href="/"
             className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
             style={{
-              fontSize: 'clamp(1.05rem, 1.8vw, 1.5rem)',
+              fontSize: 'clamp(1.25rem, 2.2vw, 1.95rem)',
               letterSpacing: '0.12em',
             }}
           >

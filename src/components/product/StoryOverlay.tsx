@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import type { Product } from '@/data/collections';
+import type { ShopifyProduct } from '@/lib/shopify/types';
 import { getStoryByProductHandle } from '@/data/stories';
 
 interface StoryOverlayProps {
-  product: Product;
+  product: ShopifyProduct;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -15,8 +15,8 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
   const overlayRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Get story from shared data source
-  const story = getStoryByProductHandle(product.id);
+  // Get story from shared data source using product handle
+  const story = getStoryByProductHandle(product.handle);
 
   // Handle escape key
   useEffect(() => {
@@ -64,14 +64,16 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
     >
       {/* Left: Product Image */}
       <div className="hidden lg:block lg:w-1/2 relative">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className="object-cover"
-          sizes="50vw"
-          priority
-        />
+        {product.featuredImage?.url ? (
+          <Image
+            src={product.featuredImage.url}
+            alt={product.featuredImage.altText ?? product.title}
+            fill
+            className="object-cover"
+            sizes="50vw"
+            priority
+          />
+        ) : null}
       </div>
 
       {/* Right: Story Panel */}
@@ -138,7 +140,7 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
               fontFamily: 'Georgia, serif',
               fontWeight: 400,
               lineHeight: 1.1,
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.005em',
             }}
           >
             {story.productName}

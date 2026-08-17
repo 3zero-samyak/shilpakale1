@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import {
-  collections,
-  getCollectionById,
-  getProductsByCollection,
-} from '@/data/collections';
+import { collectionEditorial, getCollectionEditorial } from '@/data/collectionEditorial';
+import { getCollectionByHandle as getShopifyCollectionByHandle } from '@/lib/shopify/collections';
 import ProductPageHeader from '@/components/layout/ProductPageHeader';
 
 interface CollectionPageProps {
@@ -15,14 +12,14 @@ interface CollectionPageProps {
 }
 
 export async function generateStaticParams() {
-  return collections.map((collection) => ({
+  return collectionEditorial.map((collection) => ({
     slug: collection.id,
   }));
 }
 
 export async function generateMetadata({ params }: CollectionPageProps) {
   const resolvedParams = await params;
-  const collection = getCollectionById(resolvedParams.slug);
+  const collection = getCollectionEditorial(resolvedParams.slug);
 
   if (!collection) {
     return {
@@ -38,13 +35,15 @@ export async function generateMetadata({ params }: CollectionPageProps) {
 
 export default async function CollectionPage({ params }: CollectionPageProps) {
   const resolvedParams = await params;
-  const collection = getCollectionById(resolvedParams.slug);
+  const collection = getCollectionEditorial(resolvedParams.slug);
 
   if (!collection) {
     notFound();
   }
 
-  const collectionProducts = getProductsByCollection(collection.id);
+  // Fetch product membership from Shopify using the collection handle
+  const shopifyCollection = await getShopifyCollectionByHandle(collection.id);
+  const collectionProducts = shopifyCollection?.products ?? [];
 
   return (
     <>
@@ -190,18 +189,20 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
               {collectionProducts.map((product) => (
                 <Link
                   key={product.id}
-                  href={`/products/${product.id}`}
+                  href={`/products/${product.handle}`}
                   className="group block focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-4 focus:ring-offset-[var(--ivory-archive)]"
                 >
                   {/* Image with Overlay Text */}
                   <div className="relative w-full aspect-square overflow-hidden bg-white rounded-lg">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
+                    {product.featuredImage?.url ? (
+                      <Image
+                        src={product.featuredImage.url}
+                        alt={product.featuredImage.altText ?? product.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    ) : null}
 
                     {/* Text Overlay - Lower Left */}
                     <div
@@ -219,7 +220,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                           fontWeight: 400,
                         }}
                       >
-                        {product.name}
+                        {product.title}
                       </h3>
                       <p
                         className="text-sm mb-2"
@@ -228,7 +229,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                           opacity: 0.9,
                         }}
                       >
-                        {product.description}
+                        {product.description ?? ''}
                       </p>
                       <p
                         className="text-xs uppercase tracking-wider"
@@ -238,7 +239,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                           letterSpacing: '0.1em',
                         }}
                       >
-                        CATEGORY: {product.category}
+                        CATEGORY: {product.productType ?? ''}
                       </p>
                     </div>
                   </div>

@@ -6,38 +6,38 @@ import ProductPageHeader from '@/components/layout/ProductPageHeader';
 import Footer from '@/components/layout/Footer';
 import FormStatus from '@/components/forms/FormStatus';
 import { submitEnquiry, useCustomerSession, type EnquiryFormValues } from '@/lib/customer-session';
-import { products } from '@/data/collections';
-import { collections } from '@/data/collections';
+import { collectionEditorial } from '@/data/collectionEditorial';
 
 function EnquireForm() {
   const searchParams = useSearchParams();
   const session = useCustomerSession();
   const initializedRef = useRef(false);
-  
+
   // Derive context from search params (computed on each render)
   const productHandle = searchParams?.get('product');
   const collectionSlug = searchParams?.get('collection');
   const sourceParam = searchParams?.get('source');
-  
-  let contextLabel = '';
+
+  // Derive collection context label directly (synchronous)
+  const collectionLabel = collectionSlug
+    ? (() => {
+        const collection = collectionEditorial.find(c => c.id === collectionSlug);
+        return collection ? `Regarding: ${collection.title}` : '';
+      })()
+    : '';
+  const [productLabel, setProductLabel] = useState('');
+  const contextLabel = productLabel || collectionLabel;
+
+  // Determine initial source
   let initialSource = '';
-  
   if (productHandle) {
-    const product = products.find(p => p.id === productHandle);
-    if (product) {
-      contextLabel = `Regarding: ${product.name}`;
-      initialSource = `product:${productHandle}`;
-    }
+    initialSource = `product:${productHandle}`;
   } else if (collectionSlug) {
-    const collection = collections.find(c => c.id === collectionSlug);
-    if (collection) {
-      contextLabel = `Regarding: ${collection.title}`;
-      initialSource = `collection:${collectionSlug}`;
-    }
+    initialSource = `collection:${collectionSlug}`;
   } else if (sourceParam) {
     initialSource = sourceParam;
   }
-  
+
   const [formValues, setFormValues] = useState<EnquiryFormValues>({
     firstName: '',
     lastName: '',
@@ -46,7 +46,38 @@ function EnquireForm() {
     suggestion: '',
     source: initialSource,
   });
-  
+
+  // Fetch product title to display context label when productHandle present
+  useEffect(() => {
+    let mounted = true;
+
+    if (!productHandle) {
+      const timer = setTimeout(() => {
+        if (mounted) setProductLabel('');
+      }, 0);
+      return () => {
+        mounted = false;
+        clearTimeout(timer);
+      };
+    }
+
+    fetch(`/api/shopify/product?handle=${encodeURIComponent(productHandle)}`)
+      .then((r) => r.json())
+      .then((json) => {
+        if (!mounted) return;
+        const p = json.product;
+        if (p) {
+          setProductLabel(`Regarding: ${p.title}`);
+        }
+      })
+      .catch(() => {})
+    ;
+
+    return () => {
+      mounted = false;
+    };
+  }, [productHandle]);
+
   const [errors, setErrors] = useState<Partial<Record<keyof EnquiryFormValues, string>>>({});
   const [statusMessage, setStatusMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,7 +97,7 @@ function EnquireForm() {
 
     // Validation
     const newErrors: Partial<Record<keyof EnquiryFormValues, string>> = {};
-    
+
     if (!formValues.firstName.trim()) {
       newErrors.firstName = 'First name is required';
     }
@@ -109,18 +140,18 @@ function EnquireForm() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormValues((prev) => ({ ...prev, [name]: value }));
-    
+
     // Clear error for this field
     if (errors[name as keyof EnquiryFormValues]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
-  const isFormValid = 
-    formValues.firstName && 
-    formValues.lastName && 
-    (session.isAuthenticated || formValues.email) && 
-    formValues.mobileNumber && 
+  const isFormValid =
+    formValues.firstName &&
+    formValues.lastName &&
+    (session.isAuthenticated || formValues.email) &&
+    formValues.mobileNumber &&
     formValues.suggestion &&
     formValues.suggestion.length >= 10 &&
     !isSubmitting;
@@ -128,7 +159,7 @@ function EnquireForm() {
   return (
     <>
       <ProductPageHeader />
-      
+
       <main
         style={{
           paddingTop: 'clamp(3.5rem, 5vw, 4rem)',
@@ -155,7 +186,7 @@ function EnquireForm() {
               textAlign: 'center',
               color: 'var(--heritage-green)',
               fontWeight: 400,
-              letterSpacing: '-0.01em',
+              letterSpacing: '-0.003em',
               marginBottom: 'clamp(1.5rem, 2.5vw, 2rem)',
             }}
           >

@@ -1,36 +1,42 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Product } from '@/data/collections';
+import type { ShopifyProduct } from '@/lib/shopify/types';
 import StoryOverlay from './StoryOverlay';
+import { getStoryByProductHandle } from '@/data/stories';
 
 interface ProductPageContentProps {
-  product: Product;
+  product: ShopifyProduct;
 }
 
 export default function ProductPageContent({ product }: ProductPageContentProps) {
   const [isStoryOpen, setIsStoryOpen] = useState(false);
 
+  // Check if canonical story exists for this product
+  const hasStory = !!getStoryByProductHandle(product.handle);
+
   return (
     <>
       {/* Full-Screen Product Hero with Overlay */}
       <div className="relative w-full h-screen">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        
+        {product.featuredImage?.url ? (
+          <Image
+            src={product.featuredImage.url}
+            alt={product.featuredImage.altText ?? product.title}
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        ) : null}
+
         {/* Product Info Overlay - Lower Left */}
         <div className="absolute bottom-0 left-0 right-0 p-[5vw] md:p-[8vw] lg:p-[6vw]">
           <div className="max-w-2xl">
             {/* Product Name */}
-            <h1
+              <h1
               className="text-4xl md:text-5xl lg:text-6xl mb-3 md:mb-4"
               style={{
                 color: 'var(--ivory-archive)',
@@ -40,24 +46,26 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
                 textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
               }}
             >
-              {product.name}
+              {product.title}
             </h1>
 
-            {/* Story Line / Description */}
-            <p
-              className="text-lg md:text-xl lg:text-2xl mb-4 md:mb-6"
-              style={{
-                color: 'var(--ivory-archive)',
-                opacity: 0.95,
-                lineHeight: 1.4,
-                textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)',
-              }}
-            >
-              {product.description}
-            </p>
+            {/* Story Line */}
+            {(product.metafields?.story_line || (hasStory && getStoryByProductHandle(product.handle)?.storyLine)) && (
+              <p
+                className="text-lg md:text-xl lg:text-2xl mb-4 md:mb-6"
+                style={{
+                  color: 'var(--ivory-archive)',
+                  opacity: 0.95,
+                  lineHeight: 1.4,
+                  textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)',
+                }}
+              >
+                {product.metafields?.story_line || getStoryByProductHandle(product.handle)?.storyLine}
+              </p>
+            )}
 
             {/* READ STORY Button */}
-            {product.story && (
+            {hasStory && (
               <button
                 onClick={() => setIsStoryOpen(true)}
                 className="inline-flex items-center text-sm md:text-base lg:text-lg uppercase tracking-wider hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-transparent rounded px-2 py-1"
@@ -83,7 +91,10 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
       ></div>
 
       {/* Long Description Section */}
-      {product.longDescription && (
+      {/* longDescription is editorial and not provided by Shopify product — keep compatibility if present */}
+      {(
+        (product as unknown as { longDescription?: string }).longDescription
+      ) && (
         <section className="w-full py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-[5vw]">
             <p
@@ -94,7 +105,7 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
                 lineHeight: 1.7,
               }}
             >
-              {product.longDescription}
+              {(product as unknown as { longDescription?: string }).longDescription}
             </p>
           </div>
         </section>
@@ -122,10 +133,10 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
             SPECIFICATIONS
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            {/* Material */}
-            {product.material && (
-              <div>
+          <div className="space-y-8 md:space-y-10">
+            {/* Description - Full width if present */}
+            {product.metafields?.description && (
+              <div className="w-full">
                 <h3
                   className="text-xs md:text-sm uppercase mb-3"
                   style={{
@@ -134,7 +145,7 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
                     opacity: 0.6,
                   }}
                 >
-                  MATERIAL
+                  DESCRIPTION
                 </h3>
                 <p
                   className="text-base md:text-lg"
@@ -144,36 +155,143 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
                     lineHeight: 1.6,
                   }}
                 >
-                  {product.material}
+                  {product.metafields.description.trim()}
                 </p>
               </div>
             )}
 
-            {/* Dimensions */}
-            {product.dimensions && (
-              <div>
-                <h3
-                  className="text-xs md:text-sm uppercase mb-3"
-                  style={{
-                    color: 'var(--heritage-green)',
-                    letterSpacing: '0.15em',
-                    opacity: 0.6,
-                  }}
-                >
-                  DIMENSIONS
-                </h3>
-                <p
-                  className="text-base md:text-lg"
-                  style={{
-                    color: 'var(--heritage-green)',
-                    opacity: 0.9,
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {product.dimensions}
-                </p>
-              </div>
-            )}
+            {/* Two-column grid for other specifications */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+              {/* Material */}
+              {product.metafields?.material && (
+                <div>
+                  <h3
+                    className="text-xs md:text-sm uppercase mb-3"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      letterSpacing: '0.15em',
+                      opacity: 0.6,
+                    }}
+                  >
+                    MATERIAL
+                  </h3>
+                  <p
+                    className="text-base md:text-lg"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      opacity: 0.9,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {product.metafields.material.trim()}
+                  </p>
+                </div>
+              )}
+
+              {/* Dimensions */}
+              {product.metafields?.dimensions && (
+                <div>
+                  <h3
+                    className="text-xs md:text-sm uppercase mb-3"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      letterSpacing: '0.15em',
+                      opacity: 0.6,
+                    }}
+                  >
+                    DIMENSIONS
+                  </h3>
+                  <p
+                    className="text-base md:text-lg"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      opacity: 0.9,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {product.metafields.dimensions.trim()}
+                  </p>
+                </div>
+              )}
+
+              {/* Weight */}
+              {product.metafields?.weight && (
+                <div>
+                  <h3
+                    className="text-xs md:text-sm uppercase mb-3"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      letterSpacing: '0.15em',
+                      opacity: 0.6,
+                    }}
+                  >
+                    WEIGHT
+                  </h3>
+                  <p
+                    className="text-base md:text-lg"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      opacity: 0.9,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {product.metafields.weight.trim()}
+                  </p>
+                </div>
+              )}
+
+              {/* Parts */}
+              {product.metafields?.parts && (
+                <div>
+                  <h3
+                    className="text-xs md:text-sm uppercase mb-3"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      letterSpacing: '0.15em',
+                      opacity: 0.6,
+                    }}
+                  >
+                    PARTS
+                  </h3>
+                  <p
+                    className="text-base md:text-lg"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      opacity: 0.9,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {product.metafields.parts.trim()}
+                  </p>
+                </div>
+              )}
+
+              {/* Colour */}
+              {product.metafields?.colour && (
+                <div>
+                  <h3
+                    className="text-xs md:text-sm uppercase mb-3"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      letterSpacing: '0.15em',
+                      opacity: 0.6,
+                    }}
+                  >
+                    COLOUR
+                  </h3>
+                  <p
+                    className="text-base md:text-lg"
+                    style={{
+                      color: 'var(--heritage-green)',
+                      opacity: 0.9,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {product.metafields.colour.trim()}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -215,7 +333,7 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
             </div>
 
             <Link
-              href={`/enquire?product=${product.id}`}
+              href={`/enquire?product=${product.handle}`}
               className="inline-flex items-center justify-center md:justify-start text-sm md:text-base uppercase tracking-wider hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-2 focus:ring-offset-[var(--ivory-archive)] rounded px-6 py-3 border whitespace-nowrap"
               style={{
                 color: 'var(--heritage-green)',

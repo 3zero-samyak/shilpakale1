@@ -226,7 +226,7 @@ export default function ProductPhilosophy() {
                 fontFamily: 'Georgia, serif',
                 fontSize: 'clamp(2.75rem, 5.5vw, 6rem)',
                 lineHeight: 1.02,
-                letterSpacing: '-0.02em',
+                letterSpacing: '-0.005em',
                 maxWidth: '72rem',
                 marginInline: 'auto',
                 marginBottom: 'clamp(1rem, 2vw, 1.5rem)',
@@ -285,7 +285,7 @@ export default function ProductPhilosophy() {
                   fontFamily: 'Georgia, serif',
                   fontSize: 'clamp(2rem, 3.5vw, 3.5rem)',
                   lineHeight: 1.1,
-                  letterSpacing: '-0.01em',
+                  letterSpacing: '-0.003em',
                   animation: prefersReducedMotion ? 'none' : 'fadeInUp 500ms ease-out',
                 }}
               >

@@ -143,7 +143,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
               fontFamily: 'Georgia, serif',
               fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
               lineHeight: 1.1,
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.005em',
               color: 'var(--heritage-green)',
               fontWeight: 400,
               marginBottom: 'clamp(3rem, 5vw, 4rem)',

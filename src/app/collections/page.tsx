@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { collections } from '@/data/collections';
+import { collectionEditorial } from '@/data/collectionEditorial';
 import ProductPageHeader from '@/components/layout/ProductPageHeader';
 
 export const metadata = {
@@ -51,7 +51,7 @@ export default function CollectionsPage() {
 
           {/* Collections Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12">
-            {collections.map((collection) => (
+            {collectionEditorial.map((collection) => (
               <Link
                 key={collection.id}
                 href={`/collections/${collection.id}`}

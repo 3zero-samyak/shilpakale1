@@ -41,7 +41,7 @@ export default function StoryIndexEntry({ story, isLast = false }: StoryIndexEnt
               fontFamily: 'Georgia, serif',
               fontSize: 'clamp(2.25rem, 4.8vw, 5.5rem)',
               lineHeight: 1,
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.005em',
               color: 'var(--heritage-green)',
               fontWeight: 400,
               marginBottom: 'clamp(0.75rem, 1.5vw, 1.5rem)',

@@ -1,18 +1,30 @@
-'use client';
+"use client";
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { products, getCollectionById } from '@/data/collections';
+import { collectionEditorial } from '@/data/collectionEditorial';
 
 interface ProductSearchOverlayProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
+type SearchResult = {
+  id: string;
+  handle: string;
+  title: string;
+  description?: string | null;
+  featuredImage?: { url: string; altText?: string | null } | null;
+  collections?: { handle: string; title?: string }[];
+  productType?: string | null;
+};
+
 export default function ProductSearchOverlay({ isOpen, onClose }: ProductSearchOverlayProps) {
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   // Handle overlay close and reset query
   const handleClose = useCallback(() => {
@@ -32,7 +44,7 @@ export default function ProductSearchOverlay({ isOpen, onClose }: ProductSearchO
       document.addEventListener('keydown', handleEscape);
       // Prevent body scroll when overlay is open
       document.body.style.overflow = 'hidden';
-      
+
       // Focus input after a brief delay
       setTimeout(() => {
         inputRef.current?.focus();
@@ -47,22 +59,50 @@ export default function ProductSearchOverlay({ isOpen, onClose }: ProductSearchO
     };
   }, [isOpen, handleClose]);
 
-  // Filter products based on query
-  const filteredProducts = query.trim()
-    ? products.filter((product) => {
-        const searchQuery = query.toLowerCase();
-        const collection = getCollectionById(product.collectionId);
-        
-        return (
-          product.name.toLowerCase().includes(searchQuery) ||
-          product.category.toLowerCase().includes(searchQuery) ||
-          product.id.toLowerCase().includes(searchQuery) ||
-          (product.story?.title && product.story.title.toLowerCase().includes(searchQuery)) ||
-          (product.description && product.description.toLowerCase().includes(searchQuery)) ||
-          (collection?.title && collection.title.toLowerCase().includes(searchQuery))
-        );
-      })
-    : [];
+  // Fetch search results from server API when query changes
+  useEffect(() => {
+    let mounted = true;
+    const controller = new AbortController();
+
+    // Async function to perform search
+    const performSearch = async () => {
+      const trimmedQuery = query.trim();
+
+      if (!trimmedQuery) {
+        // Clear results when query is empty
+        if (mounted) {
+          setResults([]);
+        }
+        return;
+      }
+
+      setIsSearching(true);
+
+      try {
+        const res = await fetch(`/api/shopify/search?q=${encodeURIComponent(trimmedQuery)}`, {
+          signal: controller.signal,
+        });
+        const json = await res.json();
+
+        if (mounted) {
+          setResults(json.results || []);
+        }
+      } catch {
+        // Ignore abort errors
+      } finally {
+        if (mounted) {
+          setIsSearching(false);
+        }
+      }
+    };
+
+    performSearch();
+
+    return () => {
+      mounted = false;
+      controller.abort();
+    };
+  }, [query]);
 
   if (!isOpen) return null;
 
@@ -157,7 +197,7 @@ export default function ProductSearchOverlay({ isOpen, onClose }: ProductSearchO
               </p>
             )}
 
-            {query.trim() && filteredProducts.length === 0 && (
+            {query.trim() && !isSearching && results.length === 0 && (
               <p
                 className="text-center py-12 text-sm"
                 style={{
@@ -169,28 +209,29 @@ export default function ProductSearchOverlay({ isOpen, onClose }: ProductSearchO
               </p>
             )}
 
-            {filteredProducts.length > 0 && (
+            {results.length > 0 && (
               <div className="space-y-4">
-                {filteredProducts.map((product) => {
-                  const collection = getCollectionById(product.collectionId);
-                  
+                {results.map((product: SearchResult) => {
+                  const collection = collectionEditorial.find((c) => c.id === product.collections?.[0]?.handle);
                   return (
                     <Link
-                      key={product.id}
-                      href={`/products/${product.id}`}
+                      key={product.handle}
+                      href={`/products/${product.handle}`}
                       onClick={onClose}
                       className="flex gap-4 p-4 border rounded hover:bg-[rgba(11,58,47,0.03)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-2 focus:ring-offset-[var(--ivory-archive)]"
                       style={{ borderColor: 'rgba(11, 58, 47, 0.12)' }}
                     >
                       {/* Product Thumbnail */}
                       <div className="relative w-20 h-20 flex-shrink-0 bg-white rounded overflow-hidden">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-cover"
-                          sizes="80px"
-                        />
+                        {product.featuredImage?.url ? (
+                          <Image
+                            src={product.featuredImage.url}
+                            alt={product.featuredImage.altText ?? product.title}
+                            fill
+                            className="object-cover"
+                            sizes="80px"
+                          />
+                        ) : null}
                       </div>
 
                       {/* Product Info */}
@@ -202,9 +243,9 @@ export default function ProductSearchOverlay({ isOpen, onClose }: ProductSearchO
                             fontFamily: 'Georgia, serif',
                           }}
                         >
-                          {product.name}
+                          {product.title}
                         </h3>
-                        
+
                         <p
                           className="text-sm mb-1"
                           style={{
@@ -212,19 +253,19 @@ export default function ProductSearchOverlay({ isOpen, onClose }: ProductSearchO
                             opacity: 0.7,
                           }}
                         >
-                          {product.description}
+                          {product.description ?? ''}
                         </p>
 
                         <div className="flex flex-wrap gap-2 text-xs">
                           <span
                             className="uppercase tracking-wider"
                             style={{
-                              color: 'var(--archive-sage)',
+                              color: 'var(--archive-sage)'
                             }}
                           >
-                            {product.category}
+                            {product.productType ?? ''}
                           </span>
-                          
+
                           {collection && (
                             <>
                               <span style={{ color: 'var(--archive-sage)' }}>•</span>

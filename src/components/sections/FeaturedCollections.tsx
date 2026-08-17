@@ -1,11 +1,23 @@
-"use client";
-
 import Link from 'next/link';
 import Image from 'next/image';
-import { products } from '@/data/collections';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { getProductsByHandles } from '@/lib/shopify/products';
 
-export default function FeaturedCollections() {
+const FEATURED_HANDLES = [
+  'light-in-stone',
+  'the-subtractive-temple',
+  'the-ghatika-yantra',
+  'terrain-of-resistance',
+  'ports-routes-power',
+  'stone-river-and-empire',
+  'the-chettinad-floor-archive',
+  'the-four-faces-of-water',
+  'the-floating-illusion',
+];
+
+export default async function FeaturedCollections() {
+  const products = await getProductsByHandles(FEATURED_HANDLES);
+
   return (
     <section className="w-full" style={{ minHeight: '75svh' }}>
       {/* Full-Width Heritage Green Heading Band */}
@@ -94,27 +106,29 @@ export default function FeaturedCollections() {
                   threshold={0.15}
                   className={index === 8 ? 'featured-product-grid-item--wide' : ''}
                 >
-                  <Link
-                    href={`/products/${product.id}`}
+                    <Link
+                      href={`/products/${product.handle}`}
                     className="featured-product-card group"
                   >
                     {/* Image with Overlay Text */}
                     <div className="featured-product-card__image">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
+                      {product.featuredImage?.url ? (
+                        <Image
+                          src={product.featuredImage.url}
+                          alt={product.featuredImage.altText ?? product.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : null}
                       
                       {/* Text Overlay - Lower Section */}
                       <div className="featured-product-card__overlay">
                         <h3 className="featured-product-card__title">
-                          {product.name}
+                          {product.title}
                         </h3>
                         <p className="featured-product-card__description">
-                          {product.description}
+                          {product.description ?? ''}
                         </p>
                         
                         {/* Discover Link */}

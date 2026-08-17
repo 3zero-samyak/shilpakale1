@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { collections } from '@/data/collections';
+import { collectionEditorial } from '@/data/collectionEditorial';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 export default function MasterCollections() {
@@ -51,7 +51,7 @@ export default function MasterCollections() {
 
         {/* Three-Column Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
-          {collections.map((collection, index) => (
+          {collectionEditorial.map((collection, index) => (
             <ScrollReveal
               key={collection.id}
               direction="up"

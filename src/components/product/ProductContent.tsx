@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
 import Link from 'next/link';
-import type { Product } from '@/data/collections';
+import type { ShopifyProduct } from '@/lib/shopify/types';
 import StoryOverlay from './StoryOverlay';
 import { getStoryByProductHandle } from '@/data/stories';
 
 interface ProductContentProps {
-  product: Product;
+  product: ShopifyProduct;
   onlyStoryButton?: boolean;
 }
 
 export default function ProductContent({ product, onlyStoryButton = false }: ProductContentProps) {
   const [isStoryOpen, setIsStoryOpen] = useState(false);
-  
-  // Check if story exists in shared data
-  const hasStory = !!getStoryByProductHandle(product.id);
+
+  // Check if story exists in shared data using handle
+  const hasStory = !!getStoryByProductHandle(product.handle);
 
   // If onlyStoryButton is true, render just the READ STORY button for hero overlay
   if (onlyStoryButton) {
     if (!hasStory) return null;
-    
+
     return (
       <button
         onClick={() => setIsStoryOpen(true)}
@@ -46,8 +46,9 @@ export default function ProductContent({ product, onlyStoryButton = false }: Pro
         }}
       ></div>
 
-      {/* Long Description Section */}
-      {product.longDescription && (
+      {/* Long Description Section (editorial compatibility) */}
+      {/* Editorial field longDescription may be present on product */}
+      {(product as unknown as { longDescription?: string }).longDescription && (
         <section className="w-full py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-[5vw]">
             <p
@@ -58,7 +59,7 @@ export default function ProductContent({ product, onlyStoryButton = false }: Pro
                 lineHeight: 1.7,
               }}
             >
-              {product.longDescription}
+              {(product as unknown as { longDescription?: string }).longDescription}
             </p>
           </div>
         </section>
@@ -88,7 +89,7 @@ export default function ProductContent({ product, onlyStoryButton = false }: Pro
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             {/* Material */}
-            {product.material && (
+            {product.metafields?.material && (
               <div>
                 <h3
                   className="text-xs md:text-sm uppercase mb-3"
@@ -108,13 +109,13 @@ export default function ProductContent({ product, onlyStoryButton = false }: Pro
                     lineHeight: 1.6,
                   }}
                 >
-                  {product.material}
+                  {product.metafields.material}
                 </p>
               </div>
             )}
 
             {/* Dimensions */}
-            {product.dimensions && (
+            {product.metafields?.dimensions && (
               <div>
                 <h3
                   className="text-xs md:text-sm uppercase mb-3"
@@ -134,7 +135,7 @@ export default function ProductContent({ product, onlyStoryButton = false }: Pro
                     lineHeight: 1.6,
                   }}
                 >
-                  {product.dimensions}
+                  {product.metafields.dimensions}
                 </p>
               </div>
             )}
@@ -179,7 +180,7 @@ export default function ProductContent({ product, onlyStoryButton = false }: Pro
             </div>
 
             <Link
-              href={`/enquire?product=${product.id}`}
+              href={`/enquire?product=${product.handle}`}
               className="inline-flex items-center justify-center md:justify-start text-sm md:text-base uppercase tracking-wider hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-2 focus:ring-offset-[var(--ivory-archive)] rounded px-6 py-3 border whitespace-nowrap"
               style={{
                 color: 'var(--heritage-green)',

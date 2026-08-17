@@ -37,7 +37,7 @@ export default function TermsPage() {
               textAlign: 'center',
               color: 'var(--heritage-green)',
               fontWeight: 400,
-              letterSpacing: '-0.01em',
+              letterSpacing: '-0.003em',
               marginBottom: 'clamp(3rem, 5vw, 5rem)',
             }}
           >

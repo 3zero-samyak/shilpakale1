@@ -109,7 +109,7 @@ export default function Footer() {
           className="w-full mx-auto"
           style={{
             maxWidth: '120rem',
-            paddingBlock: 'clamp(3.5rem, 7vw, 6rem)',
+            paddingBlock: 'clamp(1.5rem, 3vw, 2.5rem)',
             paddingInline: '1.5rem',
             textAlign: 'center',
           }}
@@ -117,14 +117,14 @@ export default function Footer() {
           {/* Approved footer artwork - uses public path /images/brand/footer.jpeg */}
           <ScrollReveal direction="up" distance={24} duration={800} delay={360}>
             <div className="footer-brand-artwork">
-              <div style={{ width: 'min(100%, 48rem)' }}>
+              <div style={{ width: 'min(100%, 36rem)', margin: '0 auto' }}>
                 <Image
                   src="/images/brand/footer.jpeg"
                   alt="SHILPAKALE — footer artwork"
                   width={1200}
                   height={200}
                   style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-                  sizes="(max-width: 640px) 100vw, 1200px"
+                  sizes="(max-width: 640px) 100vw, 36rem"
                 />
               </div>
             </div>

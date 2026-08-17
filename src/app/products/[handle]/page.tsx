@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { products, getProductById, getCollectionById } from '@/data/collections';
+import { getProductByHandle } from '@/lib/shopify/products';
+import { getCollectionByHandle } from '@/lib/shopify/collections';
 import ProductPageHeader from '@/components/layout/ProductPageHeader';
 import ProductPageContent from '@/components/product/ProductPageContent';
+import type { ShopifyProduct } from '@/lib/shopify/types';
 
 interface ProductPageProps {
   params: Promise<{
@@ -11,36 +13,36 @@ interface ProductPageProps {
 }
 
 export async function generateStaticParams() {
-  return products.map((product) => ({
-    handle: product.id,
-  }));
+  // Fetch all products from Shopify and return handles as params
+  const products = await (await import('@/lib/shopify/products')).getProducts();
+  return products.map((product) => ({ handle: product.handle }));
 }
 
 export async function generateMetadata({ params }: ProductPageProps) {
   const resolvedParams = await params;
-  const product = getProductById(resolvedParams.handle);
+  const product = await getProductByHandle(resolvedParams.handle);
 
   if (!product) {
-    return {
-      title: 'Product Not Found',
-    };
+    return { title: 'Product Not Found' };
   }
 
   return {
-    title: `${product.name} | SHILPAKALE`,
-    description: product.description,
+    title: `${product.title} | SHILPAKALE`,
+    description: product.description ?? undefined,
   };
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const resolvedParams = await params;
-  const product = getProductById(resolvedParams.handle);
+  const product = await getProductByHandle(resolvedParams.handle);
 
   if (!product) {
     notFound();
   }
 
-  const collection = getCollectionById(product.collectionId);
+  // Derive collection if available
+  const collectionHandle = product.collections?.[0]?.handle ?? null;
+  const collection = collectionHandle ? await getCollectionByHandle(collectionHandle) : null;
 
   return (
     <>
@@ -62,7 +64,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <div className="max-w-7xl mx-auto px-[5vw] py-4 md:py-5 flex items-center justify-between">
             {collection && (
               <Link
-                href={`/collections/${product.collectionId}`}
+                href={`/collections/${collection.handle}`}
                 className="header-nav-link text-xs md:text-sm uppercase focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-2 focus:ring-offset-[var(--ivory-archive)]"
                 style={{
                   color: 'var(--heritage-green)',
@@ -74,7 +76,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </Link>
             )}
             <Link
-              href={`/enquire?product=${product.id}`}
+              href={`/enquire?product=${product.handle}`}
               className="header-nav-link text-xs md:text-sm uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-2 focus:ring-offset-[var(--ivory-archive)]"
               style={{
                 color: 'var(--heritage-green)',
@@ -87,7 +89,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
 
         {/* Product Page Content */}
-        <ProductPageContent product={product} />
+        <ProductPageContent product={product as ShopifyProduct} />
       </main>
     </>
   );

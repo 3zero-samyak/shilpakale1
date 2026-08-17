@@ -56,7 +56,7 @@ export default function StoriesPage() {
                 fontFamily: 'Georgia, serif',
                 fontSize: 'clamp(2.5rem, 5vw, 5rem)',
                 lineHeight: 1.1,
-                letterSpacing: '-0.01em',
+                letterSpacing: '-0.003em',
                 color: 'var(--heritage-green)',
                 fontWeight: 400,
                 marginBottom: 'clamp(1.5rem, 2.5vw, 2.5rem)',
