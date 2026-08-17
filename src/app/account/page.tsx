@@ -37,7 +37,7 @@ export default async function AccountPage() {
           {!customer ? (
             <div className="w-full max-w-[34rem] mx-auto">
               <p className="mb-6 text-center" style={{ color: 'var(--heritage-green)', opacity: 0.9 }}>
-                Sign in to view your SHILPAKALE account, orders and saved customer details.
+                Sign in to view your SHILPAKALE account, orders and account details.
               </p>
 
               <div className="flex flex-col gap-4">
@@ -47,12 +47,6 @@ export default async function AccountPage() {
                 >
                   <span className="text-base md:text-lg uppercase tracking-wider font-medium">
                     SIGN IN
-                  </span>
-                </Link>
-
-                <Link href="/" className="account-option-button group">
-                  <span className="text-base md:text-lg uppercase tracking-wider font-medium">
-                    CONTINUE WITHOUT SIGN IN
                   </span>
                 </Link>
               </div>
