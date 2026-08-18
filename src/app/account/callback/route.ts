@@ -106,6 +106,13 @@ export async function GET(req: Request) {
     const authCookie = makeAuthSessionCookieHeader(authSession, secret, process.env.NODE_ENV === 'production');
     const clearTemp = clearTempAuthCookieHeader(process.env.NODE_ENV === 'production');
 
+    // Diagnose cookie size — browser/server limits are typically ~4096 bytes
+    const authCookieBytes = Buffer.byteLength(authCookie, 'utf8');
+    console.log('[customer-auth] auth cookie byte length:', authCookieBytes);
+    if (authCookieBytes >= 3800) {
+      console.log('[customer-auth] auth cookie size warning');
+    }
+
     const redirectTo = temp.returnTo || '/account';
     const res = NextResponse.redirect(new URL(redirectTo, url));
     res.headers.append('Set-Cookie', authCookie);

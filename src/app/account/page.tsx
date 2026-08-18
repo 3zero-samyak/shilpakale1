@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default async function AccountPage() {
-  const customer = await getAuthenticatedCustomer();
+  const result = await getAuthenticatedCustomer();
 
   return (
     <>
@@ -33,7 +33,7 @@ export default async function AccountPage() {
             ACCOUNT
           </h1>
 
-          {!customer ? (
+          {result.status === 'unauthenticated' && (
             <div className="w-full max-w-[34rem] mx-auto">
               <p className="mb-6 text-center" style={{ color: 'var(--heritage-green)', opacity: 0.9 }}>
                 Sign in to view your SHILPAKALE account, orders and account details.
@@ -51,11 +51,39 @@ export default async function AccountPage() {
                 </a>
               </div>
             </div>
-          ) : (
+          )}
+
+          {result.status === 'api_error' && (
+            <div className="w-full max-w-[34rem] mx-auto text-center">
+              <p className="mb-6" style={{ color: 'var(--heritage-green)', opacity: 0.9 }}>
+                We could not load your account details right now.
+              </p>
+              <div className="flex flex-col gap-4">
+                <a
+                  href="/account"
+                  className="account-option-button group"
+                >
+                  <span className="text-base md:text-lg uppercase tracking-wider font-medium">
+                    TRY AGAIN
+                  </span>
+                </a>
+                {/* Plain anchor: logout clears session cookie; must not be prefetched */}
+                <a href="/api/auth/logout" className="account-option-button">
+                  <span className="text-sm uppercase tracking-wider font-medium">Sign Out</span>
+                </a>
+              </div>
+            </div>
+          )}
+
+          {result.status === 'authenticated' && (
             <div className="w-full max-w-3xl mx-auto bg-white/0 p-4 rounded">
               <div className="mb-6">
-                <h2 style={{ color: 'var(--heritage-green)', fontFamily: 'Georgia, serif', fontWeight: 400 }} className="text-xl">{customer.displayName || `${customer.firstName ?? ''} ${customer.lastName ?? ''}`}</h2>
-                <p style={{ color: 'var(--heritage-green)', opacity: 0.85 }}>{customer.emailAddress?.emailAddress}</p>
+                <h2 style={{ color: 'var(--heritage-green)', fontFamily: 'Georgia, serif', fontWeight: 400 }} className="text-xl">
+                  {(result.customer.displayName as string) || `${(result.customer.firstName as string) ?? ''} ${(result.customer.lastName as string) ?? ''}`}
+                </h2>
+                <p style={{ color: 'var(--heritage-green)', opacity: 0.85 }}>
+                  {(result.customer.emailAddress as { emailAddress?: string })?.emailAddress}
+                </p>
               </div>
 
               <div className="flex gap-3">
