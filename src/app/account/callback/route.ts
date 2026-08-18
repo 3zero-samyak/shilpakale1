@@ -2,6 +2,7 @@ import "server-only";
 import { NextResponse } from 'next/server';
 import { getOpenIdConfiguration } from '@/lib/shopify/customer-account/discovery';
 import { readSignedCookieFromHeader, clearTempAuthCookieHeader, makeAuthSessionCookieHeader, parseSignedCookie } from '@/lib/shopify/customer-account/session';
+import { sanitizeReturnTo } from '@/lib/safe-return';
 
 function base64UrlDecode(input: string) {
   input = input.replace(/-/g, '+').replace(/_/g, '/');
@@ -113,7 +114,7 @@ export async function GET(req: Request) {
       console.log('[customer-auth] auth cookie size warning');
     }
 
-    const redirectTo = temp.returnTo || '/account';
+    const redirectTo = sanitizeReturnTo(temp.returnTo || '/account');
     const res = NextResponse.redirect(new URL(redirectTo, url));
     res.headers.append('Set-Cookie', authCookie);
     res.headers.append('Set-Cookie', clearTemp);

@@ -78,12 +78,14 @@ export default async function AccountPage() {
           {result.status === 'authenticated' && (
             <div className="w-full max-w-3xl mx-auto bg-white/0 p-4 rounded">
               <div className="mb-6">
-                <h2 style={{ color: 'var(--heritage-green)', fontFamily: 'Georgia, serif', fontWeight: 400 }} className="text-xl">
-                  {(result.customer.displayName as string) || `${(result.customer.firstName as string) ?? ''} ${(result.customer.lastName as string) ?? ''}`}
-                </h2>
-                <p style={{ color: 'var(--heritage-green)', opacity: 0.85 }}>
-                  {(result.customer.emailAddress as { emailAddress?: string })?.emailAddress}
-                </p>
+                {((result.customer.firstName as string) || (result.customer.lastName as string)) ? (
+                  <>
+                    <h2 style={{ color: 'var(--heritage-green)', fontFamily: 'Georgia, serif', fontWeight: 400 }} className="text-xl">{`${(result.customer.firstName as string) ?? ''} ${(result.customer.lastName as string) ?? ''}`.trim()}</h2>
+                    <p style={{ color: 'var(--heritage-green)', opacity: 0.85 }}>{(result.customer.emailAddress as { emailAddress?: string })?.emailAddress}</p>
+                  </>
+                ) : (
+                  <h2 style={{ color: 'var(--heritage-green)', fontFamily: 'Georgia, serif', fontWeight: 400 }} className="text-xl">{(result.customer.emailAddress as { emailAddress?: string })?.emailAddress}</h2>
+                )}
               </div>
 
               <div className="flex gap-3">

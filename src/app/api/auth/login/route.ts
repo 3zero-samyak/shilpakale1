@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { getOpenIdConfiguration } from '@/lib/shopify/customer-account/discovery';
 import { generatePKCE, generateStateNonce } from '@/lib/shopify/customer-account/pkce';
 import { makeTempAuthCookieHeader } from '@/lib/shopify/customer-account/session';
+import { sanitizeReturnTo } from '@/lib/safe-return';
 
 const APP_CALLBACK = 'https://shilpakale.vercel.app/account/callback';
 
@@ -10,11 +11,8 @@ export async function GET(req: Request) {
   try {
     console.log('[customer-auth] login initiated');
     const url = new URL(req.url);
-    const returnTo = url.searchParams.get('returnTo') || '/account';
-    // Prevent open redirects: allow only internal paths
-    if (!returnTo.startsWith('/')) {
-      return NextResponse.redirect(new URL('/account', url));
-    }
+    const rawReturn = url.searchParams.get('returnTo') || '/account';
+    const returnTo = sanitizeReturnTo(rawReturn);
 
     const storeDomain = process.env.SHOPIFY_STORE_DOMAIN as string;
     if (!storeDomain) throw new Error('Store domain not configured');
