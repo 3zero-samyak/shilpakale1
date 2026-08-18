@@ -47,6 +47,7 @@ async function verifyIdToken(idToken: string, jwksUri: string, expectedNonce: st
 
 export async function GET(req: Request) {
   try {
+    console.log('[customer-auth] callback received');
     const url = new URL(req.url);
     const code = url.searchParams.get('code');
     const state = url.searchParams.get('state');
@@ -59,11 +60,14 @@ export async function GET(req: Request) {
     const cookieHeader = req.headers.get('cookie') || null;
     const signed = readSignedCookieFromHeader(cookieHeader, 'shilpakale_oauth_temp');
     const secret = process.env.AUTH_SESSION_SECRET as string;
+    console.log('[customer-auth] temporary OAuth cookie present:', !!signed);
     if (!signed) return NextResponse.redirect(new URL('/account?error=session_missing', url));
     type TempSession = { state: string; code_verifier: string; nonce: string; returnTo?: string };
     const temp = parseSignedCookie(signed, secret) as TempSession | null;
     if (!temp) return NextResponse.redirect(new URL('/account?error=session_invalid', url));
-    if (temp.state !== state) return NextResponse.redirect(new URL('/account?error=state_mismatch', url));
+    const stateMatch = temp.state === state;
+    console.log('[customer-auth] callback state validation:', stateMatch ? 'passed' : 'failed');
+    if (!stateMatch) return NextResponse.redirect(new URL('/account?error=state_mismatch', url));
 
     const storeDomain = process.env.SHOPIFY_STORE_DOMAIN as string;
     const openid = await getOpenIdConfiguration(storeDomain);
@@ -84,10 +88,12 @@ export async function GET(req: Request) {
     if (!tokenRes.ok) return NextResponse.redirect(new URL('/account?error=token_exchange_failed', url));
     const tokenJson = await tokenRes.json();
     const { access_token, refresh_token, id_token, expires_in } = tokenJson as { access_token?: string; refresh_token?: string; id_token?: string; expires_in?: number };
+    console.log('[customer-auth] token exchange:', tokenRes.ok ? 'succeeded' : 'failed');
     if (!id_token) return NextResponse.redirect(new URL('/account?error=no_id_token', url));
 
     // Verify id_token
     const payload = await verifyIdToken(id_token, openid.jwks_uri, temp.nonce, openid.issuer, process.env.SHOPIFY_CUSTOMER_ACCOUNT_CLIENT_ID as string) as { sub?: string };
+    console.log('[customer-auth] id token validation: passed');
 
     // Build auth session cookie (store tokens server-side as signed cookie)
     const authSession = {
@@ -104,6 +110,8 @@ export async function GET(req: Request) {
     const res = NextResponse.redirect(new URL(redirectTo, url));
     res.headers.append('Set-Cookie', authCookie);
     res.headers.append('Set-Cookie', clearTemp);
+    console.log('[customer-auth] session cookie created');
+    console.log('[customer-auth] redirecting authenticated customer to', redirectTo);
     return res;
   } catch {
     return NextResponse.redirect(new URL('/account?error=auth_failure', req.url));

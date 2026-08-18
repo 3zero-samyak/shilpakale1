@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import ProductPageHeader from '@/components/layout/ProductPageHeader';
 import { getAuthenticatedCustomer } from '@/lib/shopify/customer-account/client';
 
@@ -41,14 +40,15 @@ export default async function AccountPage() {
               </p>
 
               <div className="flex flex-col gap-4">
-                <Link
+                {/* Plain anchor: OAuth initiation is side-effectful; must not be prefetched */}
+                <a
                   href="/api/auth/login?returnTo=/account"
                   className="account-option-button group"
                 >
                   <span className="text-base md:text-lg uppercase tracking-wider font-medium">
                     SIGN IN
                   </span>
-                </Link>
+                </a>
               </div>
             </div>
           ) : (
@@ -59,9 +59,10 @@ export default async function AccountPage() {
               </div>
 
               <div className="flex gap-3">
-                <Link href="/api/auth/logout" className="account-option-button">
+                {/* Plain anchor: logout clears session cookie; must not be prefetched */}
+                <a href="/api/auth/logout" className="account-option-button">
                   <span className="text-sm uppercase tracking-wider font-medium">Sign Out</span>
-                </Link>
+                </a>
               </div>
             </div>
           )}

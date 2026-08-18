@@ -8,6 +8,7 @@ const APP_CALLBACK = 'https://shilpakale.vercel.app/account/callback';
 
 export async function GET(req: Request) {
   try {
+    console.log('[customer-auth] login initiated');
     const url = new URL(req.url);
     const returnTo = url.searchParams.get('returnTo') || '/account';
     // Prevent open redirects: allow only internal paths
@@ -40,6 +41,7 @@ export async function GET(req: Request) {
 
     const res = NextResponse.redirect(authUrl.toString());
     res.headers.append('Set-Cookie', cookie);
+    console.log('[customer-auth] temporary OAuth cookie written, redirecting to Shopify');
     return res;
   } catch {
     return NextResponse.json({ error: 'login_error' }, { status: 500 });
