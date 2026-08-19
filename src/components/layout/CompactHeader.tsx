@@ -50,7 +50,7 @@ export default function CompactHeader() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all bg-[var(--heritage-green)]"
         style={{
-          height: 'clamp(5rem, 7.2vw, 6rem)',
+          height: 'clamp(5.5rem, 8.5vw, 7.5rem)',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(-0.5rem)',
           pointerEvents: isVisible ? 'auto' : 'none',
@@ -68,13 +68,13 @@ export default function CompactHeader() {
           {/* Left: Logo */}
           <div className="flex items-center">
               <Link
-              href="/"
-              className="relative focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
-              style={{
-                width: 'clamp(2.75rem, 5.2vw, 3.5rem)',
-                height: 'clamp(2.75rem, 5.2vw, 3.5rem)',
-              }}
-            >
+                href="/"
+                className="relative focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
+                style={{
+                  width: 'clamp(3rem, 6vw, 4rem)',
+                  height: 'clamp(3rem, 6vw, 4rem)',
+                }}
+              >
               <Image
                 src="/images/brand/shilpakale-logo.jpeg"
                 alt="SHILPAKALE Logo"
@@ -90,7 +90,7 @@ export default function CompactHeader() {
             href="/"
             className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
             style={{
-              fontSize: 'clamp(1.25rem, 2.2vw, 1.95rem)',
+              fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
               letterSpacing: '0.12em',
             }}
           >
@@ -105,13 +105,13 @@ export default function CompactHeader() {
               aria-expanded={isMenuOpen}
               aria-controls="compact-navigation-menu"
               aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'}
-              className="flex flex-col items-center justify-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded compact-menu-toggle"
-                style={{ width: 'clamp(3.25rem, 5.2vw, 3.75rem)', height: 'clamp(3.25rem, 5.2vw, 3.75rem)' }}
+              className="flex flex-col items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded compact-menu-toggle"
+                style={{ width: 'clamp(3.75rem, 6vw, 4.5rem)', height: 'clamp(3.75rem, 6vw, 4.5rem)' }}
             >
               {isMenuOpen ? (
                 // Close icon (X)
                 <svg
-                    className="w-8 h-8"
+                    className="w-9 h-9"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -125,13 +125,13 @@ export default function CompactHeader() {
                   <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
               ) : (
-                <div className="flex flex-col items-center justify-center gap-1">
+                <div className="flex flex-col items-center justify-center gap-1.5">
                     <span
-                      className="w-7 h-2 rounded transition-all"
+                      className="w-8 h-2.5 rounded transition-all"
                       style={{ backgroundColor: 'var(--ivory-archive)' }}
                     />
                     <span
-                      className="w-7 h-2 rounded transition-all"
+                      className="w-8 h-2.5 rounded transition-all"
                       style={{ backgroundColor: 'var(--ivory-archive)' }}
                     />
                 </div>

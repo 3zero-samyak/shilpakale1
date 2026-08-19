@@ -7,9 +7,9 @@ import FullStoryContent from '@/components/stories/FullStoryContent';
 import { getStoryBySlug, getAllStorySlug } from '@/data/stories';
 
 interface StoryPageProps {
-  params: {
+  params: Promise<{
     storySlug: string;
-  };
+  }>;
 }
 
 // Generate static params for all story routes
@@ -21,7 +21,8 @@ export async function generateStaticParams() {
 
 // Generate metadata for each story
 export async function generateMetadata({ params }: StoryPageProps): Promise<Metadata> {
-  const story = getStoryBySlug(params.storySlug);
+  const resolvedParams = await params;
+  const story = getStoryBySlug(resolvedParams.storySlug);
 
   if (!story) {
     return {
@@ -35,8 +36,9 @@ export async function generateMetadata({ params }: StoryPageProps): Promise<Meta
   };
 }
 
-export default function StoryPage({ params }: StoryPageProps) {
-  const story = getStoryBySlug(params.storySlug);
+export default async function StoryPage({ params }: StoryPageProps) {
+  const resolvedParams = await params;
+  const story = getStoryBySlug(resolvedParams.storySlug);
 
   // Return 404 if story not found
   if (!story) {
@@ -78,6 +80,7 @@ export default function StoryPage({ params }: StoryPageProps) {
             <li>
               <Link
                 href="/"
+                className="story-breadcrumb-link"
                 style={{
                   fontFamily: 'var(--font-montserrat)',
                   fontSize: 'clamp(0.75rem, 0.85vw, 0.82rem)',
@@ -88,8 +91,6 @@ export default function StoryPage({ params }: StoryPageProps) {
                   textDecoration: 'none',
                   transition: 'opacity 200ms ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.5')}
               >
                 Home
               </Link>
@@ -105,6 +106,7 @@ export default function StoryPage({ params }: StoryPageProps) {
             <li>
               <Link
                 href="/stories"
+                className="story-breadcrumb-link"
                 style={{
                   fontFamily: 'var(--font-montserrat)',
                   fontSize: 'clamp(0.75rem, 0.85vw, 0.82rem)',
@@ -115,8 +117,6 @@ export default function StoryPage({ params }: StoryPageProps) {
                   textDecoration: 'none',
                   transition: 'opacity 200ms ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.5')}
               >
                 Stories
               </Link>
@@ -159,6 +159,7 @@ export default function StoryPage({ params }: StoryPageProps) {
         >
           <Link
             href="/stories"
+            className="story-back-link"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -174,8 +175,6 @@ export default function StoryPage({ params }: StoryPageProps) {
               borderBottom: '1px solid transparent',
               transition: 'border-color 200ms ease',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.borderBottomColor = 'var(--heritage-green)')}
-            onMouseLeave={(e) => (e.currentTarget.style.borderBottomColor = 'transparent')}
           >
             ← STORIES
           </Link>

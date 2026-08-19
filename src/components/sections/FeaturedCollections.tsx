@@ -28,20 +28,15 @@ export default async function FeaturedCollections() {
         }}
       >
         <div
+          className="w-full flex flex-col items-center text-center gap-6 md:flex-row md:items-center md:justify-between md:gap-8 md:text-left"
           style={{
-            width: '100%',
             maxWidth: '120rem',
             marginInline: 'auto',
             paddingInline: 'clamp(1.5rem, 5vw, 6rem)',
             paddingBlock: 'clamp(2rem, 4vw, 3.5rem)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '2rem',
-            flexWrap: 'wrap',
           }}
         >
-          {/* Left: Section Title */}
+          {/* Section Title - centered on mobile, left on desktop */}
           <ScrollReveal direction="left" distance={24} duration={900}>
             <h2
               className="uppercase"
@@ -56,7 +51,7 @@ export default async function FeaturedCollections() {
             </h2>
           </ScrollReveal>
 
-          {/* Right: View Collection Link */}
+          {/* View Collection Link - centered on mobile, right on desktop */}
           <ScrollReveal direction="right" distance={24} duration={900} delay={100}>
             <Link
               href="/collections"

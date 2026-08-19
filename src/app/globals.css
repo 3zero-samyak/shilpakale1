@@ -628,3 +628,15 @@ html {
   min-height: 170px;
   resize: none;
 }
+
+/* ==========================================================================
+   Story page breadcrumb and navigation
+   ========================================================================== */
+
+.story-breadcrumb-link:hover {
+  opacity: 0.8 !important;
+}
+
+.story-back-link:hover {
+  border-bottom-color: var(--heritage-green) !important;
+}

@@ -1,7 +1,58 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
+
+// Helper component: render Next/Image using natural dimensions when missing
+function NaturalNextImage({ src, alt, width, height, priority }: { src: string; alt: string; width?: number | null; height?: number | null; priority?: boolean }) {
+  const [dims, setDims] = useState<{ width: number; height: number } | null>(null);
+  // Client-side measurement for missing dimensions
+  useEffect(() => {
+    if (width && height) return; // nothing to do when dims provided
+    let isMounted = true;
+    const img = document.createElement('img') as HTMLImageElement;
+    img.src = src;
+    img.onload = () => {
+      if (isMounted) setDims({ width: img.naturalWidth, height: img.naturalHeight });
+    };
+    return () => {
+      isMounted = false;
+    };
+  }, [src, width, height]);
+
+  // If width/height already provided, render immediately
+  if (width && height) {
+    return (
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className="w-full h-auto object-contain"
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        priority={priority}
+      />
+    );
+  }
+
+  if (!dims) {
+    // Placeholder occupies minimal vertical space to avoid large layout shift
+    return <div style={{ width: '100%', minHeight: 160 }} />;
+  }
+
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      width={dims.width}
+      height={dims.height}
+      className="w-full h-auto object-contain"
+      sizes="(max-width: 1024px) 100vw, 50vw"
+      priority={priority}
+    />
+  );
+}
 import type { ShopifyProduct } from '@/lib/shopify/types';
 import { getStoryByProductHandle } from '@/data/stories';
 
@@ -54,7 +105,7 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex"
+      className="fixed inset-0 z-50 flex flex-col lg:flex-row"
       style={{
         backgroundColor: 'var(--ivory-archive)',
       }}
@@ -62,25 +113,56 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
       aria-modal="true"
       aria-labelledby="story-title"
     >
-      {/* Left: Product Image */}
-      <div className="hidden lg:block lg:w-1/2 relative">
-        {product.featuredImage?.url ? (
-          <Image
-            src={product.featuredImage.url}
-            alt={product.featuredImage.altText ?? product.title}
-            fill
-            className="object-cover"
-            sizes="50vw"
-            priority
-          />
-        ) : null}
+      {/* Left: Product Image Gallery - Independently Scrollable */}
+      <div
+        className="w-full lg:w-1/2 overflow-y-auto overflow-x-hidden"
+        style={{
+          height: '100dvh',
+        }}
+      >
+        <div className="flex flex-col">
+          {product.images && product.images.length > 0 ? (
+            product.images.map((image, index) => (
+              <div
+                key={image.url}
+                className="w-full"
+                style={{
+                  borderBottom: index < product.images.length - 1
+                    ? '1px solid rgba(11, 58, 47, 0.08)'
+                    : 'none',
+                }}
+              >
+                <div className="w-full">
+                  <NaturalNextImage
+                    src={image.url}
+                    alt={image.altText ?? `${product.title} — product view ${index + 1}`}
+                    width={image.width ?? null}
+                    height={image.height ?? null}
+                    priority={index === 0}
+                  />
+                </div>
+              </div>
+            ))
+          ) : product.featuredImage?.url ? (
+            <div className="w-full">
+              <NaturalNextImage
+                src={product.featuredImage.url}
+                alt={product.featuredImage.altText ?? product.title}
+                width={product.featuredImage.width ?? null}
+                height={product.featuredImage.height ?? null}
+                priority
+              />
+            </div>
+          ) : null}
+        </div>
       </div>
 
-      {/* Right: Story Panel */}
+      {/* Right: Story Panel - Independently Scrollable */}
       <div
         className="w-full lg:w-1/2 overflow-y-auto"
         style={{
           backgroundColor: 'var(--ivory-archive)',
+          height: '100dvh',
         }}
       >
         {/* Story Header with Close Button */}
