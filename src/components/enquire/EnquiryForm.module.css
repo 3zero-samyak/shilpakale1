@@ -1,0 +1,93 @@
+/* Enquiry form scoped field styles - isolated from global CSS */
+
+.field {
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  box-sizing: border-box;
+  padding: 0.875rem 1rem;
+  color: var(--heritage-green);
+  background: var(--ivory-archive);
+  border: 1px solid var(--heritage-green);
+  border-radius: 8px;
+  outline: none;
+  font: inherit;
+  opacity: 1;
+  visibility: visible;
+  transition: box-shadow 180ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.field:hover,
+.field:focus {
+  outline: none;
+  box-shadow: 0 2px 10px rgba(11, 58, 47, 0.12);
+}
+
+.field::placeholder {
+  color: rgba(11, 58, 47, 0.4);
+}
+
+.textarea {
+  min-height: 170px;
+  resize: none;
+  line-height: 1.6;
+}
+
+.fieldGroup {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0B3A2F;
+  opacity: 0.9;
+}
+
+.helper {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #0B3A2F;
+  opacity: 0.7;
+}
+
+.error {
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: #c53030;
+}
+
+.twoColumn {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .twoColumn {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form {
+  width: 100%;
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.submitWrapper {
+  margin-top: 32px;
+}
+
+.status {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #0B3A2F;
+}

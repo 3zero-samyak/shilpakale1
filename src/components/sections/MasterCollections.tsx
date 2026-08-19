@@ -62,9 +62,9 @@ export default function MasterCollections() {
             >
               <Link
                 href={`/collections/${collection.id}`}
-                className="group block border pt-8 pb-10 px-6 md:px-8 transition-opacity hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)]"
+                className="group block border pt-8 pb-10 px-6 md:px-8 transition-all hover:border-opacity-50 focus:outline-none focus:ring-1 focus:ring-[var(--ivory-archive)] focus:ring-offset-1 focus:ring-offset-[var(--heritage-green)]"
                 style={{
-                  borderColor: 'rgba(110, 139, 116, 0.25)',
+                  borderColor: 'rgba(110, 139, 116, 0.20)',
                 }}
               >
               {/* Collection Number */}

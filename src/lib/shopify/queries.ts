@@ -2,6 +2,7 @@ export const PRODUCT_CARD_FIELDS = `
   id
   handle
   title
+  tags
   description
   descriptionHtml
   productType

@@ -50,6 +50,7 @@ export type GraphQLProductNode = {
   availableForSale: boolean;
   featuredImage?: GraphQLImageNode | null;
   images?: { nodes: GraphQLImageNode[] };
+  tags?: string[];
   priceRange?: {
     minVariantPrice?: GraphQLMoneyV2 | null;
     maxVariantPrice?: GraphQLMoneyV2 | null;

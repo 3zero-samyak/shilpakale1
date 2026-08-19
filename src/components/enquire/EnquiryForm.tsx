@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent, useRef, useEffect } from 'react';
+import styles from './EnquiryForm.module.css';
 
 export type EnquiryFormProps = {
   productHandle?: string | null;
@@ -94,49 +95,100 @@ export default function EnquiryForm({ productHandle, productTitle, authenticated
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+    <form onSubmit={handleSubmit} noValidate className={styles.form}>
       {productTitle && (
-        <div className="text-sm text-[var(--archive-sage)] italic">Regarding: {productTitle}</div>
+        <div className="text-sm text-[var(--archive-sage)] italic" style={{ marginBottom: '24px' }}>Regarding: {productTitle}</div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-        <div>
-          <label htmlFor="firstName" className="block text-sm uppercase tracking-wider mb-2">First Name *</label>
-          <input id="firstName" name="firstName" value={formValues.firstName} onChange={handleChange} />
-          {errors.firstName && <div className="text-red-600">{errors.firstName}</div>}
+      <div className={styles.twoColumn}>
+        <div className={styles.fieldGroup}>
+          <label htmlFor="firstName" className={styles.label}>First Name *</label>
+          <input
+            id="firstName"
+            name="firstName"
+            value={formValues.firstName}
+            onChange={handleChange}
+            className={styles.field}
+            type="text"
+            autoComplete="given-name"
+          />
+          {errors.firstName && <div className={styles.error}>{errors.firstName}</div>}
         </div>
-        <div>
-          <label htmlFor="lastName" className="block text-sm uppercase tracking-wider mb-2">Last Name *</label>
-          <input id="lastName" name="lastName" value={formValues.lastName} onChange={handleChange} />
-          {errors.lastName && <div className="text-red-600">{errors.lastName}</div>}
+        <div className={styles.fieldGroup}>
+          <label htmlFor="lastName" className={styles.label}>Last Name *</label>
+          <input
+            id="lastName"
+            name="lastName"
+            value={formValues.lastName}
+            onChange={handleChange}
+            className={styles.field}
+            type="text"
+            autoComplete="family-name"
+          />
+          {errors.lastName && <div className={styles.error}>{errors.lastName}</div>}
         </div>
       </div>
 
-      <div>
-        <label className="block text-sm uppercase tracking-wider mb-2">Email</label>
-        <input name="email" value={formValues.email} readOnly />
-        <div className="text-xs opacity-70">Verified via Shopify</div>
+      <div className={styles.fieldGroup}>
+        <label htmlFor="email" className={styles.label}>Email</label>
+        <input
+          id="email"
+          name="email"
+          value={formValues.email}
+          readOnly
+          className={`${styles.field} cursor-not-allowed`}
+          aria-readonly
+          autoComplete="email"
+          type="email"
+        />
+        <div className={styles.helper}>Verified via Shopify</div>
       </div>
 
-      <div>
-        <label className="block text-sm uppercase tracking-wider mb-2">Mobile Number *</label>
-        <input name="mobileNumber" value={formValues.mobileNumber} onChange={handleChange} />
-        {errors.mobileNumber && <div className="text-red-600">{errors.mobileNumber}</div>}
+      <div className={styles.fieldGroup}>
+        <label htmlFor="mobileNumber" className={styles.label}>Mobile Number *</label>
+        <input
+          id="mobileNumber"
+          name="mobileNumber"
+          value={formValues.mobileNumber}
+          onChange={handleChange}
+          className={styles.field}
+          type="tel"
+          autoComplete="tel"
+        />
+        {errors.mobileNumber && <div className={styles.error}>{errors.mobileNumber}</div>}
       </div>
 
-      <div>
-        <label className="block text-sm uppercase tracking-wider mb-2">Enquiry *</label>
-        <textarea name="suggestion" value={formValues.suggestion} onChange={handleChange} rows={6} />
-        {errors.suggestion && <div className="text-red-600">{errors.suggestion}</div>}
+      <div className={styles.fieldGroup}>
+        <label htmlFor="suggestion" className={styles.label}>Enquiry *</label>
+        <textarea
+          id="suggestion"
+          name="suggestion"
+          value={formValues.suggestion}
+          onChange={handleChange}
+          rows={6}
+          className={`${styles.field} ${styles.textarea}`}
+        />
+        {errors.suggestion && <div className={styles.error}>{errors.suggestion}</div>}
       </div>
 
-      <div>
-        <button type="submit" disabled={isSubmitting} className="account-option-button">
+      <div className={styles.submitWrapper}>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="inline-block rounded-md px-6 py-3 text-sm font-semibold transition-shadow w-full"
+          style={{
+            background: 'var(--heritage-green)',
+            color: 'var(--ivory-archive)',
+            boxShadow: '0 6px 18px rgba(11,58,47,0.04)'
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 10px 30px rgba(11,58,47,0.08)'; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 6px 18px rgba(11,58,47,0.04)'; }}
+        >
           {isSubmitting ? 'Submitting…' : 'Submit Enquiry'}
         </button>
       </div>
 
-      {statusMessage && <div className="mt-4 text-center">{statusMessage}</div>}
+      {statusMessage && <div className={styles.status}>{statusMessage}</div>}
     </form>
   );
 }

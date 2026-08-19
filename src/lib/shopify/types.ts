@@ -35,6 +35,7 @@ export type ShopifyProduct = {
   priceRange?: { minVariantPrice?: ShopifyMoney | null; maxVariantPrice?: ShopifyMoney | null } | null;
   variants: ShopifyVariant[];
   collections: { id: string; handle: string; title: string }[];
+  tags?: string[];
   metafields: {
     description?: string | null;
     story_line?: string | null;

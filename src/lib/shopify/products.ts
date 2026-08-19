@@ -81,6 +81,7 @@ export function normalizeProduct(node: GraphQLProductNode): ShopifyProduct {
     featuredImage: normalizeImage(node.featuredImage) ?? null,
     images: (node.images?.nodes || []).map(normalizeImage).filter((img): img is ShopifyImage => img !== null),
     priceRange: node.priceRange ?? null,
+    tags: node.tags ?? [],
     variants: (node.variants?.nodes || []).map((v: GraphQLVariantNode) => ({
       id: v.id,
       title: v.title,

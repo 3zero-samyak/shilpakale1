@@ -64,14 +64,35 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
               </p>
             )}
 
+            {/* Tags as visible rounded chips */}
+            {product.tags && product.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mt-4">
+                {product.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center px-2.5 py-1 text-xs uppercase tracking-wide"
+                    style={{
+                      background: 'var(--ivory-archive)',
+                      color: 'var(--heritage-green)',
+                      border: '1px solid rgba(11,58,47,0.15)',
+                      borderRadius: '4px',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+
             {/* READ STORY Button */}
             {hasStory && (
               <button
                 onClick={() => setIsStoryOpen(true)}
-                className="inline-flex items-center text-sm md:text-base lg:text-lg uppercase tracking-wider hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-transparent rounded px-2 py-1"
+                className="inline-flex items-center mt-5 text-xs uppercase tracking-widest hover:opacity-70 transition-opacity focus:outline-none focus:ring-1 focus:ring-[var(--ivory-archive)] focus:ring-offset-1 rounded px-2 py-1"
                 style={{
                   color: 'var(--ivory-archive)',
-                  letterSpacing: '0.1em',
+                  letterSpacing: '0.15em',
                   textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)',
                 }}
               >
@@ -334,11 +355,12 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
 
             <Link
               href={`/enquire?product=${product.handle}`}
-              className="inline-flex items-center justify-center md:justify-start text-sm md:text-base uppercase tracking-wider hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-2 focus:ring-offset-[var(--ivory-archive)] rounded px-6 py-3 border whitespace-nowrap"
+              className="inline-flex items-center justify-center md:justify-start text-xs uppercase tracking-widest hover:opacity-70 transition-opacity focus:outline-none focus:ring-1 focus:ring-[var(--heritage-green)] focus:ring-offset-1 px-5 py-3 border whitespace-nowrap"
               style={{
                 color: 'var(--heritage-green)',
                 borderColor: 'var(--heritage-green)',
-                letterSpacing: '0.1em',
+                letterSpacing: '0.12em',
+                borderRadius: '6px',
               }}
             >
               ENQUIRE →

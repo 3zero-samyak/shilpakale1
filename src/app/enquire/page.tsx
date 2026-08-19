@@ -1,16 +1,20 @@
 import ProductPageHeader from '@/components/layout/ProductPageHeader';
-import Footer from '@/components/layout/Footer';
 import EnquiryForm from '@/components/enquire/EnquiryForm';
 import { getAuthenticatedCustomer } from '@/lib/shopify/customer-account/client';
 import { getProductByHandle } from '@/lib/shopify/products';
 import { sanitizeReturnTo } from '@/lib/safe-return';
 
-export default async function EnquirePage({ searchParams }: { searchParams?: Record<string, string> }) {
-  const productHandle = searchParams?.product ?? null;
+export default async function EnquirePage({ searchParams }: { searchParams?: Promise<Record<string, string | undefined>> }) {
+  // In Next.js 15+, searchParams is a Promise and must be awaited
+  const resolvedSearchParams = await searchParams;
+  const productHandle = resolvedSearchParams?.product ?? null;
   const returnPath = `/enquire${productHandle ? `?product=${encodeURIComponent(productHandle)}` : ''}`;
   const safeReturn = sanitizeReturnTo(returnPath);
 
+  console.log('[enquire-auth] lookup started');
+  console.log('[enquire-auth] product handle present:', !!productHandle);
   const auth = await getAuthenticatedCustomer();
+  console.log('[enquire-auth] auth status:', auth.status);
 
   let productTitle: string | null = null;
   if (productHandle) {
@@ -59,15 +63,16 @@ export default async function EnquirePage({ searchParams }: { searchParams?: Rec
 
           {auth.status === 'api_error' && (
             <div className="w-full max-w-[34rem] mx-auto text-center">
-              <p className="mb-6" style={{ color: 'var(--heritage-green)', opacity: 0.9 }}>We could not verify your account right now.</p>
+              <p className="mb-6" style={{ color: 'var(--heritage-green)', opacity: 0.9 }}>We could not load your verified account details right now.</p>
               <div className="flex flex-col gap-4">
                 <a href="/enquire" className="account-option-button group">TRY AGAIN</a>
-                <a href="/api/auth/logout" className="account-option-button">Sign Out</a>
+                <a href="/api/auth/logout" className="account-option-button">SIGN OUT</a>
               </div>
             </div>
           )}
 
           {auth.status === 'authenticated' && (() => {
+            console.log('[enquire-auth] rendering enquiry form');
             const cust = auth.customer as { firstName?: string; lastName?: string; emailAddress?: { emailAddress?: string } };
             return (
               <div style={{ maxWidth: '56rem', marginInline: 'auto' }}>
@@ -82,8 +87,6 @@ export default async function EnquirePage({ searchParams }: { searchParams?: Rec
           })()}
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }
