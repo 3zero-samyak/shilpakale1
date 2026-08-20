@@ -2,6 +2,7 @@
 
 import { useState, FormEvent, useRef, useEffect } from 'react';
 import styles from './EnquiryForm.module.css';
+import Link from 'next/link';
 
 export type EnquiryFormProps = {
   productHandle?: string | null;
@@ -33,6 +34,7 @@ export default function EnquiryForm({ productHandle, productTitle, authenticated
 
   const [errors, setErrors] = useState<Record<string,string>>({});
   const [statusMessage, setStatusMessage] = useState('');
+  const [submittedReference, setSubmittedReference] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -84,8 +86,12 @@ export default function EnquiryForm({ productHandle, productTitle, authenticated
           setStatusMessage('An unexpected error occurred. Please try again later.');
         }
       } else {
-        // Server will not yet return success until persistence configured
-        setStatusMessage('Enquiry submission endpoint responded.');
+        if (json?.ok && json?.enquiryReference) {
+          setSubmittedReference(json.enquiryReference);
+          setStatusMessage('');
+        } else {
+          setStatusMessage('Enquiry submission endpoint responded.');
+        }
       }
     } catch {
       setStatusMessage('Network error submitting enquiry.');
@@ -96,6 +102,21 @@ export default function EnquiryForm({ productHandle, productTitle, authenticated
 
   return (
     <form onSubmit={handleSubmit} noValidate className={styles.form}>
+      {submittedReference ? (
+        <div className={styles.status}>
+          <h3 style={{ fontFamily: 'Georgia, serif', fontSize: '1.25rem', marginBottom: '12px' }}>ENQUIRY RECEIVED</h3>
+          <p style={{ marginBottom: '12px' }}>Your enquiry has been recorded. Our team will review it and respond using your verified contact details.</p>
+          <p style={{ marginBottom: '18px' }}>Reference<br /><strong style={{ letterSpacing: '0.08em' }}>{submittedReference}</strong></p>
+          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+            {productHandle ? (
+              <Link href={`/products/${encodeURIComponent(productHandle)}`} className="account-option-button">RETURN TO PRODUCT</Link>
+            ) : (
+              <Link href="/" className="account-option-button">RETURN HOME</Link>
+            )}
+          </div>
+        </div>
+      ) : (
+        <>
       {productTitle && (
         <div className="text-sm text-[var(--archive-sage)] italic" style={{ marginBottom: '24px' }}>Regarding: {productTitle}</div>
       )}
@@ -189,6 +210,8 @@ export default function EnquiryForm({ productHandle, productTitle, authenticated
       </div>
 
       {statusMessage && <div className={styles.status}>{statusMessage}</div>}
+        </>
+      )}
     </form>
   );
 }
