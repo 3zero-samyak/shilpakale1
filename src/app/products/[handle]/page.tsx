@@ -51,7 +51,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <main 
         className="w-full bg-[var(--ivory-archive)]"
         style={{
-          paddingTop: 'clamp(3.5rem, 5vw, 4rem)',
+          // Match the fixed header height so content does not overlap the header
+          paddingTop: 'clamp(5rem, 6.5vw, 6.5rem)',
         }}
       >
         {/* Collection Name and Enquire Row */}
@@ -61,7 +62,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             borderColor: 'rgba(11, 58, 47, 0.15)',
           }}
         >
-          <div className="max-w-7xl mx-auto px-[5vw] py-4 md:py-5 flex items-center justify-between" style={{ minHeight: 'clamp(3rem, 5vw, 5.5rem)' }}>
+          <div className="max-w-7xl mx-auto px-[5vw] py-4 md:py-5 flex items-center justify-between" style={{ minHeight: 'clamp(3.5rem, 5vw, 5.5rem)' }}>
             {collection && (
               <Link
                 href={`/collections/${collection.handle}`}

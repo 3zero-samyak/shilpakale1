@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import ProductPageHeader from '@/components/layout/ProductPageHeader';
-import Footer from '@/components/layout/Footer';
 import FullStoryContent from '@/components/stories/FullStoryContent';
 import { getStoryBySlug, getAllStorySlug } from '@/data/stories';
 
@@ -181,7 +180,7 @@ export default async function StoryPage({ params }: StoryPageProps) {
         </div>
       </main>
 
-      <Footer />
+      {/* Footer is provided by the root layout; do not render here to avoid duplication */}
     </>
   );
 }

@@ -1,5 +1,4 @@
 import ProductPageHeader from '@/components/layout/ProductPageHeader';
-import Footer from '@/components/layout/Footer';
 import StoryIndexEntry from '@/components/stories/StoryIndexEntry';
 import { stories } from '@/data/stories';
 
@@ -91,7 +90,7 @@ export default function StoriesPage() {
         </div>
       </main>
 
-      <Footer />
+      {/* Footer is provided by the root layout; do not render here to avoid duplication */}
     </>
   );
 }

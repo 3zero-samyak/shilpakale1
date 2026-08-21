@@ -1,5 +1,4 @@
 import ProductPageHeader from '@/components/layout/ProductPageHeader';
-import Footer from '@/components/layout/Footer';
 
 export const metadata = {
   title: 'Terms and Conditions | SHILPAKALE',
@@ -319,7 +318,7 @@ export default function TermsPage() {
         </div>
       </main>
 
-      <Footer />
+      {/* Footer is provided by the root layout; do not render here to avoid duplication */}
     </>
   );
 }
