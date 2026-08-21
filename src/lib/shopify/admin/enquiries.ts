@@ -3,8 +3,8 @@ import { shopifyAdminGraphQL } from './client';
 import type { MetaobjectCreateResult, EnquiryPersistenceInput, EnquiryPersistenceResult } from './types';
 
 const CREATE_ENQUIRY_MUTATION = `
-mutation CreateEnquiry($input: MetaobjectCreateInput!) {
-  metaobjectCreate(input: $input) {
+mutation CreateEnquiry($metaobject: MetaobjectCreateInput!) {
+  metaobjectCreate(metaobject: $metaobject) {
     metaobject { id handle }
     userErrors { field message code }
   }
@@ -32,7 +32,7 @@ export async function createEnquiryMetaobject(input: EnquiryPersistenceInput): P
 
   const metaobject = { type: 'shilpakale_enquiry', fields };
 
-  const variables = { input: metaobject };
+  const variables = { metaobject };
 
   const res = await shopifyAdminGraphQL(CREATE_ENQUIRY_MUTATION, variables);
 
