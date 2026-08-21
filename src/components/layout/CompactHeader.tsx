@@ -76,7 +76,7 @@ export default function CompactHeader() {
                 }}
               >
               <Image
-                src="/images/brand/shilpakale-logo.jpeg"
+                src="/images/brand/shilpakale-logo-v2.png"
                 alt="SHILPAKALE Logo"
                 fill
                 className="object-contain"
