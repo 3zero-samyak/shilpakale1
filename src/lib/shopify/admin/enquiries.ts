@@ -42,6 +42,22 @@ export async function createEnquiryMetaobject(input: EnquiryPersistenceInput): P
 
   const result = (res.data as { metaobjectCreate?: MetaobjectCreateResult } | undefined)?.metaobjectCreate;
   if (!result || result.userErrors.length) {
+    // Log Shopify userErrors safely: only code, field, message
+    const errs = result?.userErrors ?? [];
+    if (errs.length) {
+      try {
+        const safe = errs.map(u => ({
+          code: u.code ?? null,
+          field: Array.isArray(u.field) ? (u.field as string[]).join(',') : (u.field as string | null | undefined) ?? null,
+          message: u.message ?? null,
+        }));
+        // Structured, safe diagnostic log
+        console.error('[enquiry] metaobject userErrors', safe);
+      } catch {
+        console.error('[enquiry] metaobject userErrors: (failed to stringify userErrors)');
+      }
+    }
+
     return { ok: false, userErrors: result?.userErrors ?? [{ message: 'Unknown error' }] };
   }
 
