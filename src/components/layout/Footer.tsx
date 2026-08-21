@@ -19,8 +19,8 @@ export default function Footer() {
           className="w-full mx-auto"
           style={{
             maxWidth: '120rem',
-            paddingBlock: 'clamp(4.5rem, 8vw, 8rem)',
-            paddingInline: 'clamp(1.5rem, 6vw, 7rem)',
+            paddingBlock: 'clamp(3rem, 6vw, 7rem)',
+            paddingInline: 'clamp(1.25rem, 5vw, 6rem)',
           }}
         >
           {/* Four Column Grid */}
@@ -29,7 +29,7 @@ export default function Footer() {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-              gap: 'clamp(2.5rem, 6vw, 7rem)',
+              gap: 'clamp(2rem, 5vw, 6rem)',
             }}
           >
             {footerColumns.map((column, index) => (
@@ -46,13 +46,13 @@ export default function Footer() {
                 <h3
                   style={{
                     fontFamily: 'var(--font-montserrat)',
-                    fontSize: 'clamp(0.72rem, 0.9vw, 0.88rem)',
-                    letterSpacing: '0.2em',
+                    fontSize: 'clamp(0.8rem, 1vw, 0.95rem)',
+                    letterSpacing: '0.18em',
                     textTransform: 'uppercase',
                     color: 'var(--ivory-archive)',
                     fontWeight: 500,
                     lineHeight: 1.2,
-                    marginBottom: '1.75rem',
+                    marginBottom: '1.5rem',
                   }}
                 >
                   {column.heading}
@@ -75,7 +75,7 @@ export default function Footer() {
                           position: 'relative',
                           display: 'inline-flex',
                           fontFamily: 'var(--font-montserrat)',
-                          fontSize: 'clamp(0.82rem, 0.95vw, 0.92rem)',
+                          fontSize: 'clamp(0.9rem, 1.05vw, 1rem)',
                           color: 'var(--ivory-archive)',
                           textDecoration: 'none',
                           opacity: 0.85,
@@ -161,14 +161,14 @@ export default function Footer() {
         @media (max-width: 1024px) {
           .footer-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-            gap: clamp(2.5rem, 5vw, 3.5rem) clamp(2rem, 4vw, 3rem) !important;
+            gap: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem) !important;
           }
         }
 
         @media (max-width: 640px) {
           .footer-grid {
             grid-template-columns: 1fr !important;
-            gap: clamp(2.5rem, 6vw, 3rem) !important;
+            gap: clamp(2rem, 5vw, 2.5rem) !important;
           }
         }
 

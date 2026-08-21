@@ -50,7 +50,7 @@ export default function CompactHeader() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all bg-[var(--heritage-green)]"
         style={{
-          height: 'clamp(5.5rem, 8.5vw, 7.5rem)',
+          height: 'clamp(5rem, 7vw, 7.5rem)',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(-0.5rem)',
           pointerEvents: isVisible ? 'auto' : 'none',
@@ -76,7 +76,7 @@ export default function CompactHeader() {
                 }}
               >
               <Image
-                src="/images/brand/shilpakale-logo-v2.png"
+                src="/images/brand/shilpakale-logo1.webp"
                 alt="SHILPAKALE Logo"
                 fill
                 className="object-contain"

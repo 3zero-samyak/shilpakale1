@@ -11,25 +11,20 @@ export default function HomeScrollHeader() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useLayoutEffect(() => {
-    const masthead = document.getElementById('site-masthead');
-    
-    if (!masthead) return;
+    // Show header immediately on scroll (after just a few pixels)
+    const handleScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      // Trigger header visibility after scrolling just 12px
+      setIsVisible(scrollY > 12);
+    };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Show header when masthead is NOT intersecting (scrolled out of view)
-        setIsVisible(!entry.isIntersecting);
-      },
-      {
-        threshold: 0,
-        rootMargin: '-1px',
-      }
-    );
+    // Initial check
+    handleScroll();
 
-    observer.observe(masthead);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -54,7 +49,7 @@ export default function HomeScrollHeader() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all bg-[var(--heritage-green)]"
         style={{
-          height: 'clamp(3.5rem, 5vw, 4rem)',
+          height: 'clamp(5rem, 7vw, 7.5rem)',
           opacity: isVisible ? 1 : 0,
           transform: isVisible ? 'translateY(0)' : 'translateY(-0.5rem)',
           pointerEvents: isVisible ? 'auto' : 'none',

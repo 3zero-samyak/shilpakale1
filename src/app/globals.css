@@ -47,9 +47,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Slightly larger base font for improved readability (approx +6%) */
+/* Slightly larger base font for improved readability */
 body {
-  font-size: 1.0625rem; /* ~17px */
+  font-size: clamp(1rem, 1.5vw, 1.0625rem); /* ~16-17px responsive */
+  line-height: 1.6;
 }
 
 @media (max-width: 420px) {
@@ -62,11 +63,53 @@ body {
 h1 {
   line-height: 1.08;
   letter-spacing: -0.005em; /* mild negative for display serif only */
+  font-size: clamp(2rem, 4vw, 3rem);
 }
 
-h2, h3, h4 {
+h2 {
   line-height: 1.12;
   letter-spacing: normal;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+h3 {
+  line-height: 1.12;
+  letter-spacing: normal;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+h4 {
+  line-height: 1.15;
+  letter-spacing: normal;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+
+/* Standard content container for consistent section width and padding */
+.content-container {
+  width: 100%;
+  max-width: 85rem; /* ~1360px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 5vw, 4rem);
+  padding-right: clamp(1.25rem, 5vw, 4rem);
+}
+
+/* Full-width section backgrounds */
+.section-full-width {
+  width: 100%;
+}
+
+/* Standard section vertical spacing */
+.section-spacing-sm {
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+}
+
+.section-spacing-md {
+  padding-block: clamp(4.5rem, 8vw, 7rem);
+}
+
+.section-spacing-lg {
+  padding-block: clamp(6rem, 10vw, 9rem);
 }
 
 /* Smooth scroll behavior */
@@ -481,11 +524,12 @@ html {
   object-position: center center;
 }
 
-/* Mobile: ensure the full homepage artwork is visible without cropping */
+/* Mobile: ensure the full homepage artwork is visible without excessive empty space */
 @media (max-width: 800px) {
   .homepage-hero {
     width: 100%;
-    min-height: 100svh;
+    min-height: clamp(75svh, 85svh, 90svh);
+    max-height: 100svh;
     background: var(--heritage-green);
     display: flex;
     align-items: center;

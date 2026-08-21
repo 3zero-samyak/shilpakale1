@@ -21,7 +21,7 @@ export default function ProductPageHeader() {
       <header
         className="fixed top-0 left-0 right-0 z-50 bg-[var(--heritage-green)]"
         style={{
-          height: 'clamp(3.5rem, 5vw, 4rem)',
+          height: 'clamp(5rem, 6.5vw, 6.5rem)',
           borderTop: '1px solid rgba(110, 139, 116, 0.22)',
           borderBottom: '1px solid rgba(110, 139, 116, 0.22)',
         }}
@@ -41,7 +41,7 @@ export default function ProductPageHeader() {
               }}
             >
               <Image
-                src="/images/brand/shilpakale-logo-v2.png"
+                src="/images/brand/shilpakale-logo1.webp"
                 alt="SHILPAKALE Logo"
                 fill
                 className="object-contain"
