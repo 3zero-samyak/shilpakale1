@@ -97,11 +97,11 @@ export default function WhyShilpakaleSlider({ slides }: WhyShilpakaleSliderProps
             onClick={handlePrevious}
             disabled={currentSlide === 0}
             aria-label="Previous slide"
-            className="text-[var(--ivory-archive)] text-sm uppercase tracking-wider hover:text-[var(--archive-sage)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
+            className="text-[var(--ivory-archive-text)] text-sm uppercase tracking-wider hover:text-[var(--archive-sage)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
           >
             Previous
           </button>
-          <span className="text-[var(--ivory-archive)] text-sm opacity-60">
+          <span className="text-[var(--ivory-archive-text)] text-sm opacity-60">
             {currentSlide + 1} / {slides.length}
           </span>
           <button
@@ -109,7 +109,7 @@ export default function WhyShilpakaleSlider({ slides }: WhyShilpakaleSliderProps
             onClick={handleNext}
             disabled={currentSlide === slides.length - 1}
             aria-label="Next slide"
-            className="text-[var(--ivory-archive)] text-sm uppercase tracking-wider hover:text-[var(--archive-sage)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
+            className="text-[var(--ivory-archive-text)] text-sm uppercase tracking-wider hover:text-[var(--archive-sage)] transition-colors disabled:opacity-30 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
           >
             Next
           </button>

@@ -88,7 +88,7 @@ export default function CompactHeader() {
           {/* Center: SHILPAKALE Wordmark */}
           <Link
             href="/"
-            className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
+            className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive-text)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
             style={{
               fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
               letterSpacing: '0.12em',
@@ -118,7 +118,7 @@ export default function CompactHeader() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  style={{ color: 'var(--ivory-archive)' }}
+                  style={{ color: 'var(--ivory-archive-text)' }}
                   aria-hidden="true"
                 >
                   <line x1="18" y1="6" x2="6" y2="18" />
@@ -142,7 +142,7 @@ export default function CompactHeader() {
           {/* Right: SHILPAKALE Wordmark */}
           <Link
             href="/"
-            className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
+            className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive-text)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
             style={{
               fontSize: 'clamp(1.25rem, 2.2vw, 1.95rem)',
               letterSpacing: '0.12em',

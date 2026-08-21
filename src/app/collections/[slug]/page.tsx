@@ -215,7 +215,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                       <h3
                         className="text-lg md:text-xl mb-1"
                         style={{
-                          color: 'var(--ivory-archive)',
+                          color: 'var(--ivory-archive-text)',
                           fontFamily: 'Georgia, serif',
                           fontWeight: 400,
                         }}
@@ -225,7 +225,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                       <p
                         className="text-sm mb-2"
                         style={{
-                          color: 'var(--ivory-archive)',
+                          color: 'var(--ivory-archive-text)',
                           opacity: 0.9,
                         }}
                       >
@@ -234,7 +234,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                       <p
                         className="text-xs uppercase tracking-wider"
                         style={{
-                          color: 'var(--ivory-archive)',
+                          color: 'var(--ivory-archive-text)',
                           opacity: 0.75,
                           letterSpacing: '0.1em',
                         }}

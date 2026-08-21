@@ -199,7 +199,7 @@ export default function EnquiryForm({ productHandle, productTitle, authenticated
           className="inline-block rounded-md px-6 py-3 text-sm font-semibold transition-shadow w-full"
           style={{
             background: 'var(--heritage-green)',
-            color: 'var(--ivory-archive)',
+            color: 'var(--ivory-archive-text)',
             boxShadow: '0 6px 18px rgba(11,58,47,0.04)'
           }}
           onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 10px 30px rgba(11,58,47,0.08)'; }}

@@ -53,7 +53,7 @@ export default function ProductPageHeader() {
           {/* Center: SHILPAKALE Wordmark */}
           <Link
             href="/"
-            className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
+            className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive-text)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
             style={{
               fontSize: 'clamp(1.05rem, 1.8vw, 1.5rem)',
               letterSpacing: '0.12em',
@@ -82,7 +82,7 @@ export default function ProductPageHeader() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  style={{ color: 'var(--ivory-archive)' }}
+                  style={{ color: 'var(--ivory-archive-text)' }}
                   aria-hidden="true"
                 >
                   <line x1="18" y1="6" x2="6" y2="18" />

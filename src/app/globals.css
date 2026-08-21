@@ -4,6 +4,8 @@
   /* SHILPAKALE Brand Colors */
   --heritage-green: #0B3A2F;
   --ivory-archive: #FDF6E3;
+  /* Brighter cream for text use on dark backgrounds */
+  --ivory-archive-text: #FFFFFF;
   --charcoal-black: #1E1E1E;
   --archive-sage: #6E8B74;
 
@@ -163,7 +165,7 @@ html {
   position: relative;
   display: inline-block;
   text-decoration: none;
-  color: rgba(253, 246, 227, 0.88);
+  color: var(--ivory-archive-text);
   padding: 0.45rem 0.9rem;
   font-size: 0.95rem;
   line-height: 1;
@@ -190,7 +192,7 @@ html {
 
 .menu-nav-link:hover,
 .menu-nav-link:focus-visible {
-  color: var(--ivory-archive);
+  color: var(--ivory-archive-text);
 }
 
 /* Compact menu toggle: show a rounded cream border on hover/focus */

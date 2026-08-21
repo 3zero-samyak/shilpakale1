@@ -19,6 +19,7 @@ export type ShilpakaleStory = {
   number: string;
   productName: string;
   productHandle: string;
+  iconSrc?: string;
   productType: string;
   storyTitle: string;
   storySlug: string;
@@ -35,6 +36,7 @@ export const stories: ShilpakaleStory[] = [
     number: '01',
     productName: 'Light in Stone',
     productHandle: 'light-in-stone',
+    iconSrc: '/images/brand/light-in-stone.webp',
     productType: 'Architecture model',
     storyTitle: 'The Temple That Measured Light',
     storySlug: 'the-temple-that-measured-light',
@@ -85,6 +87,7 @@ export const stories: ShilpakaleStory[] = [
     number: '02',
     productName: 'The Subtractive Temple',
     productHandle: 'the-subtractive-temple',
+    iconSrc: '/images/brand/subtractive-temple.webp',
     productType: 'Architecture model',
     storyTitle: 'The Temple Carved from a Single Rock',
     storySlug: 'the-temple-carved-from-a-single-rock',
@@ -135,6 +138,7 @@ export const stories: ShilpakaleStory[] = [
     number: '03',
     productName: 'The Floating Illusion',
     productHandle: 'the-floating-illusion',
+    iconSrc: '/images/brand/floating-illusion.webp',
     productType: 'Architecture model',
     storyTitle: 'The Palace That Appeared to Float on Water',
     storySlug: 'the-palace-that-appeared-to-float-on-water',
@@ -185,6 +189,7 @@ export const stories: ShilpakaleStory[] = [
     number: '04',
     productName: 'Terrain of Resistance',
     productHandle: 'terrain-of-resistance',
+    iconSrc: '/images/brand/terrain.webp',
     productType: 'Terrain model',
     storyTitle: 'The Forts Built into Mountain Geography',
     storySlug: 'the-forts-built-into-mountain-geography',
@@ -235,6 +240,7 @@ export const stories: ShilpakaleStory[] = [
     number: '05',
     productName: 'Ports, Routes, Power',
     productHandle: 'ports-routes-power',
+    iconSrc: '/images/brand/ports.webp',
     productType: 'Maritime map study',
     storyTitle: 'The Maritime Network That Shaped Trade',
     storySlug: 'the-maritime-network-that-shaped-trade',
@@ -285,6 +291,7 @@ export const stories: ShilpakaleStory[] = [
     number: '06',
     productName: 'Stone, River & Empire',
     productHandle: 'stone-river-and-empire',
+    iconSrc: '/images/brand/stone.webp',
     productType: 'Terrain model',
     storyTitle: 'The Capital Shaped by Granite and Water',
     storySlug: 'stone-river-and-empire',
@@ -335,6 +342,7 @@ export const stories: ShilpakaleStory[] = [
     number: '07',
     productName: 'The Chettinad Floor Archive',
     productHandle: 'the-chettinad-floor-archive',
+    iconSrc: '/images/brand/chettinad.webp',
     productType: 'Floor tile',
     storyTitle: 'The Visual Grammar Preserved in Handmade Tiles',
     storySlug: 'the-visual-grammar-preserved-in-handmade-tiles',
@@ -385,6 +393,7 @@ export const stories: ShilpakaleStory[] = [
     number: '08',
     productName: 'The Four Faces of Water',
     productHandle: 'the-four-faces-of-water',
+    iconSrc: '/images/brand/four.webp',
     productType: 'Architecture model',
     storyTitle: 'The Architecture of Descent Into Water',
     storySlug: 'the-architecture-of-descent-into-water',
@@ -435,6 +444,7 @@ export const stories: ShilpakaleStory[] = [
     number: '09',
     productName: 'The Ghatika Yantra',
     productHandle: 'the-ghatika-yantra',
+    iconSrc: '/images/brand/ghatika.webp',
     productType: 'Instrument model',
     storyTitle: 'The Water Clock That Measured Ritual Time',
     storySlug: 'the-water-clock-that-measured-ritual-time',

@@ -18,64 +18,53 @@ export default async function AccountPage() {
         className="w-full min-h-[calc(100svh-5rem)] flex items-center justify-center"
         style={{
           paddingTop: 'clamp(5rem, 6.5vw, 6.5rem)',
-          backgroundColor: result.status === 'unauthenticated' ? 'var(--heritage-green)' : 'var(--ivory-archive)',
+          backgroundColor: 'var(--ivory-archive)',
         }}
       >
         <div className="w-full max-w-[48rem] mx-auto px-6">
           {result.status === 'unauthenticated' && (
-            <div className="w-full max-w-[28rem] mx-auto">
-              {/* Premium Login Composition */}
+            <div className="w-full max-w-[32rem] mx-auto">
+              {/* Login Panel on ivory background */}
               <div
-                className="py-12 px-8 rounded-lg"
+                className="py-10 px-6 rounded-lg"
                 style={{
-                  border: '1px solid rgba(253, 246, 227, 0.15)',
-                  backgroundColor: 'rgba(253, 246, 227, 0.02)',
+                  border: '1px solid rgba(11, 58, 47, 0.06)',
+                  backgroundColor: 'var(--ivory-archive)',
                 }}
               >
                 {/* Login Title */}
                 <h1
-                  className="text-4xl md:text-5xl text-center mb-6"
+                  className="text-4xl md:text-5xl text-center mb-4"
                   style={{
-                    color: 'var(--ivory-archive)',
+                    color: 'var(--heritage-green)',
                     fontFamily: 'Georgia, serif',
-                    fontWeight: 300,
+                    fontWeight: 400,
                     letterSpacing: '0.02em',
                   }}
                 >
                   LOGIN
                 </h1>
 
-                {/* Explanation */}
+                {/* Simplified explanatory line */}
                 <p
-                  className="text-center mb-2"
+                  className="text-center mb-8"
                   style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.8,
+                    color: 'var(--heritage-green)',
+                    opacity: 0.9,
                     fontSize: '1rem',
-                    lineHeight: 1.6,
+                    lineHeight: 1.4,
                   }}
                 >
-                  Access your SHILPAKALE account through secure Shopify verification.
+                  to access your SHILPAKALE account
                 </p>
 
-                <p
-                  className="text-center mb-8 text-sm"
-                  style={{
-                    color: 'var(--ivory-archive)',
-                    opacity: 0.6,
-                    fontSize: '0.875rem',
-                  }}
-                >
-                  No password required. Your email is verified securely through Shopify.
-                </p>
-
-                {/* Sign In Button */}
+                {/* Sign In Button (primary) */}
                 <a
                   href="/api/auth/login?returnTo=/"
-                  className="block w-full text-center py-3.5 px-6 mb-5 rounded-md transition-all duration-200"
+                  className="block w-full text-center py-3.5 px-6 mb-4 rounded-md transition-all duration-200"
                   style={{
-                    backgroundColor: 'var(--ivory-archive)',
-                    color: 'var(--heritage-green)',
+                    backgroundColor: 'var(--heritage-green)',
+                      color: 'var(--ivory-archive-text)',
                     textDecoration: 'none',
                     fontSize: '0.95rem',
                     fontWeight: 500,
@@ -86,13 +75,14 @@ export default async function AccountPage() {
                   SIGN IN
                 </a>
 
-                {/* Back to Store */}
+                {/* Back to Store (secondary) */}
                 <Link
                   href="/"
                   className="block w-full text-center py-3 px-6 rounded-md transition-all duration-200"
                   style={{
-                    border: '1px solid rgba(253, 246, 227, 0.25)',
-                    color: 'var(--ivory-archive)',
+                    border: '1px solid var(--heritage-green)',
+                    color: 'var(--heritage-green)',
+                    backgroundColor: 'transparent',
                     textDecoration: 'none',
                     fontSize: '0.875rem',
                     fontWeight: 400,

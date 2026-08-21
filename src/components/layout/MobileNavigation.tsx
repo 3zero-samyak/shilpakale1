@@ -92,7 +92,7 @@ export default function MobileNavigation() {
                 key={item.name}
                 href={item.href}
                 onClick={closeMenu}
-                className="text-[var(--ivory-archive)] text-2xl tracking-wider hover:text-[var(--archive-sage)] transition-colors text-center focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-4 py-2"
+                className="text-[var(--ivory-archive-text)] text-2xl tracking-wider hover:text-[var(--archive-sage)] transition-colors text-center focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-4 py-2"
               >
                 {item.name}
               </Link>

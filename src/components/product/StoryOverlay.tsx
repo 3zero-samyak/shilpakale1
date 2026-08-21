@@ -65,6 +65,7 @@ interface StoryOverlayProps {
 export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Get story from shared data source using product handle
   const story = getStoryByProductHandle(product.handle);
@@ -91,6 +92,11 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
       setTimeout(() => {
         closeButtonRef.current?.focus();
       }, 100);
+      // reset overlay scroll and image index on open (defer to avoid cascading render)
+      setTimeout(() => {
+        setCurrentImageIndex(0);
+        if (overlayRef.current) overlayRef.current.scrollTop = 0;
+      }, 0);
     } else {
       document.body.style.overflow = '';
     }
@@ -105,7 +111,7 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex flex-col lg:flex-row"
+      className="fixed inset-0 z-50 flex flex-col lg:flex-row overflow-y-auto"
       style={{
         backgroundColor: 'var(--ivory-archive)',
       }}
@@ -114,35 +120,85 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
       aria-labelledby="story-title"
     >
       {/* Left: Product Image Gallery - Independently Scrollable */}
-      <div
-        className="w-full lg:w-1/2 overflow-y-auto overflow-x-hidden"
-        style={{
-          height: '100dvh',
-        }}
-      >
-        <div className="flex flex-col">
+      <div className="w-full lg:w-1/2 lg:overflow-y-auto overflow-visible lg:h-[100dvh] h-auto">
+        {/* MOBILE: single-image carousel (only one image rendered) */}
+        <div className="w-full relative">
           {product.images && product.images.length > 0 ? (
-            product.images.map((image, index) => (
-              <div
-                key={image.url}
-                className="w-full"
-                style={{
-                  borderBottom: index < product.images.length - 1
-                    ? '1px solid rgba(11, 58, 47, 0.08)'
-                    : 'none',
-                }}
-              >
-                <div className="w-full">
-                  <NaturalNextImage
-                    src={image.url}
-                    alt={image.altText ?? `${product.title} — product view ${index + 1}`}
-                    width={image.width ?? null}
-                    height={image.height ?? null}
-                    priority={index === 0}
-                  />
+            // Render single image on mobile; on desktop the gallery remains as a column
+            (
+              // Desktop: keep original vertical gallery
+              <>
+                <div className="hidden lg:block">
+                  <div className="flex flex-col">
+                    {product.images.map((image, index) => (
+                      <div
+                        key={image.url}
+                        className="w-full"
+                        style={{
+                          borderBottom: index < product.images.length - 1 ? '1px solid rgba(11, 58, 47, 0.08)' : 'none',
+                        }}
+                      >
+                        <div className="w-full">
+                          <NaturalNextImage
+                            src={image.url}
+                            alt={image.altText ?? `${product.title} — product view ${index + 1}`}
+                            width={image.width ?? null}
+                            height={image.height ?? null}
+                            priority={index === 0}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))
+
+                {/* Mobile/Tablet single image view with arrows */}
+                <div className="block lg:hidden">
+                  <div className="w-full relative">
+                    <NaturalNextImage
+                      src={product.images[currentImageIndex].url}
+                      alt={product.images[currentImageIndex].altText ?? `${product.title} — product view ${currentImageIndex + 1}`}
+                      width={product.images[currentImageIndex].width ?? null}
+                      height={product.images[currentImageIndex].height ?? null}
+                      priority={currentImageIndex === 0}
+                    />
+
+                    {/* Left Arrow */}
+                    {product.images.length > 1 && (
+                      <button
+                        onClick={() => setCurrentImageIndex((i) => Math.max(0, i - 1))}
+                        disabled={currentImageIndex === 0}
+                        aria-label="Previous image"
+                        className={`absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center bg-white/80 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)]`}
+                        style={{ color: 'var(--heritage-green)' }}
+                      >
+                        ‹
+                      </button>
+                    )}
+
+                    {/* Right Arrow */}
+                    {product.images.length > 1 && (
+                      <button
+                        onClick={() => setCurrentImageIndex((i) => Math.min(product.images!.length - 1, i + 1))}
+                        disabled={currentImageIndex >= product.images.length - 1}
+                        aria-label="Next image"
+                        className={`absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center bg-white/80 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)]`}
+                        style={{ color: 'var(--heritage-green)' }}
+                      >
+                        ›
+                      </button>
+                    )}
+
+                    {/* Optional image counter */}
+                    {product.images.length > 1 && (
+                      <div className="absolute right-3 bottom-3 text-xs bg-white/80 px-2 py-1 rounded" style={{ color: 'var(--heritage-green)' }}>
+                        {currentImageIndex + 1} / {product.images.length}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </>
+            )
           ) : product.featuredImage?.url ? (
             <div className="w-full">
               <NaturalNextImage
@@ -158,21 +214,12 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
       </div>
 
       {/* Right: Story Panel - Independently Scrollable */}
-      <div
-        className="w-full lg:w-1/2 overflow-y-auto"
-        style={{
-          backgroundColor: 'var(--ivory-archive)',
-          height: '100dvh',
-        }}
-      >
+      <div className="w-full lg:w-1/2 lg:overflow-y-auto overflow-visible lg:h-[100dvh] h-auto" style={{ backgroundColor: 'var(--ivory-archive)' }}>
         {/* Story Header with Close Button */}
         <div
-          className="sticky top-0 z-10 border-b"
-          style={{
-            backgroundColor: 'var(--ivory-archive)',
-            borderColor: 'rgba(11, 58, 47, 0.15)',
-          }}
-        >
+            className="sticky top-0 z-10 border-b"
+            style={{ backgroundColor: 'var(--ivory-archive)', borderColor: 'rgba(11, 58, 47, 0.15)' }}
+          >
           <div className="max-w-3xl mx-auto px-[5vw] py-5 md:py-6 flex items-center justify-between">
             <h2
               id="story-title"
@@ -187,7 +234,12 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
             </h2>
             <button
               ref={closeButtonRef}
-              onClick={onClose}
+              onClick={() => {
+                setCurrentImageIndex(0);
+                // reset scroll to top of overlay
+                if (overlayRef.current) overlayRef.current.scrollTop = 0;
+                onClose();
+              }}
               className="text-2xl md:text-3xl hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--heritage-green)] focus:ring-offset-2 focus:ring-offset-[var(--ivory-archive)] rounded p-2"
               style={{
                 color: 'var(--heritage-green)',
@@ -201,7 +253,7 @@ export default function StoryOverlay({ product, isOpen, onClose }: StoryOverlayP
         </div>
 
         {/* Story Content */}
-        <div className="max-w-3xl mx-auto px-[5vw] py-12 md:py-16">
+        <div className="max-w-3xl mx-auto px-[5vw] py-12 md:py-16 min-h-[100dvh]">
           {/* Story Number */}
           <p
             className="text-xs md:text-sm uppercase mb-4 md:mb-6"

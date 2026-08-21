@@ -22,7 +22,7 @@ export default function MasterCollections() {
             <p
               className="text-xs md:text-sm uppercase mb-4 md:mb-6"
               style={{
-                color: 'var(--ivory-archive)',
+                color: 'var(--ivory-archive-text)',
                 letterSpacing: '0.2em',
                 opacity: 0.7,
               }}
@@ -36,7 +36,7 @@ export default function MasterCollections() {
             <h2
               className="text-3xl md:text-5xl lg:text-6xl"
               style={{
-                color: 'var(--ivory-archive)',
+                color: 'var(--ivory-archive-text)',
                 fontFamily: 'Georgia, serif',
                 fontWeight: 400,
                 lineHeight: 1.2,
@@ -62,7 +62,7 @@ export default function MasterCollections() {
             >
               <Link
                 href={`/collections/${collection.id}`}
-                className="group block border pt-8 pb-10 px-6 md:px-8 transition-all hover:border-opacity-50 focus:outline-none focus:ring-1 focus:ring-[var(--ivory-archive)] focus:ring-offset-1 focus:ring-offset-[var(--heritage-green)]"
+                className="group block border pt-8 pb-10 px-6 md:px-8 transition-all hover:border-opacity-50 focus:outline-none focus:ring-1 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-1 focus:ring-offset-[var(--heritage-green)]"
                 style={{
                   borderColor: 'rgba(110, 139, 116, 0.20)',
                 }}
@@ -71,7 +71,7 @@ export default function MasterCollections() {
               <p
                 className="text-xs uppercase mb-4"
                 style={{
-                  color: 'var(--ivory-archive)',
+                  color: 'var(--ivory-archive-text)',
                   letterSpacing: '0.2em',
                   opacity: 0.5,
                 }}
@@ -83,7 +83,7 @@ export default function MasterCollections() {
               <h3
                 className="text-xl md:text-2xl mb-2"
                 style={{
-                  color: 'var(--ivory-archive)',
+                  color: 'var(--ivory-archive-text)',
                   fontFamily: 'Georgia, serif',
                   fontWeight: 400,
                   lineHeight: 1.3,
@@ -107,7 +107,7 @@ export default function MasterCollections() {
               <p
                 className="text-sm md:text-base"
                 style={{
-                  color: 'var(--ivory-archive)',
+                  color: 'var(--ivory-archive-text)',
                   opacity: 0.7,
                   lineHeight: 1.7,
                 }}

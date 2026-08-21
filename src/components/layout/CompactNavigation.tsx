@@ -58,14 +58,14 @@ export default function CompactNavigation({ isOpen, onClose }: CompactNavigation
       >
         {/* Close Button */}
         <div className="flex items-center justify-between px-6 py-5 border-b border-[rgba(110,139,116,0.22)]">
-          <span className="text-[var(--ivory-archive)] text-sm uppercase tracking-wider opacity-60">
+          <span className="text-[var(--ivory-archive-text)] text-sm uppercase tracking-wider opacity-60">
             Menu
           </span>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close navigation"
-            className="w-8 h-8 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
+            className="w-8 h-8 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
           >
             <svg
               className="w-5 h-5"
@@ -75,7 +75,7 @@ export default function CompactNavigation({ isOpen, onClose }: CompactNavigation
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              style={{ color: 'var(--ivory-archive)' }}
+              style={{ color: 'var(--ivory-archive-text)' }}
               aria-hidden="true"
             >
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -91,7 +91,7 @@ export default function CompactNavigation({ isOpen, onClose }: CompactNavigation
               key={item.label}
               href={item.href}
               onClick={onClose}
-              className="menu-nav-link text-[var(--ivory-archive)] text-sm tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)]"
+              className="menu-nav-link text-[var(--ivory-archive-text)] text-sm tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)]"
             >
               {item.label}
             </Link>

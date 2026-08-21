@@ -394,7 +394,7 @@ export default function ContactPage() {
                     fontSize: 'clamp(0.8rem, 0.92vw, 0.9rem)',
                     letterSpacing: '0.12em',
                     textTransform: 'uppercase',
-                    color: 'var(--ivory-archive)',
+                    color: 'var(--ivory-archive-text)',
                     backgroundColor: 'var(--heritage-green)',
                     border: 'none',
                     cursor: 'pointer',

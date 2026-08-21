@@ -8,8 +8,8 @@ const slides = [
         {/* Eyebrow */}
         <p
           className="text-xs md:text-sm uppercase mb-6 md:mb-8"
-          style={{
-            color: 'var(--ivory-archive)',
+            style={{
+            color: 'var(--ivory-archive-text)',
             letterSpacing: '0.2em',
           }}
         >
@@ -20,7 +20,7 @@ const slides = [
         <h2
           className="text-3xl md:text-5xl lg:text-6xl mb-6 md:mb-8"
           style={{
-            color: 'var(--ivory-archive)',
+            color: 'var(--ivory-archive-text)',
             fontFamily: 'Georgia, serif',
             fontWeight: 400,
             lineHeight: 1.2,
@@ -34,7 +34,7 @@ const slides = [
         <p
           className="text-base md:text-lg max-w-2xl"
           style={{
-            color: 'var(--ivory-archive)',
+            color: 'var(--ivory-archive-text)',
             lineHeight: 1.7,
             opacity: 0.95,
           }}
@@ -54,8 +54,8 @@ const slides = [
         {/* Eyebrow */}
         <p
           className="text-xs md:text-sm uppercase mb-6 md:mb-8"
-          style={{
-            color: 'var(--ivory-archive)',
+            style={{
+            color: 'var(--ivory-archive-text)',
             letterSpacing: '0.2em',
           }}
         >
@@ -66,7 +66,7 @@ const slides = [
         <h3
           className="text-2xl md:text-4xl lg:text-5xl mb-4 md:mb-6"
           style={{
-            color: 'var(--ivory-archive)',
+            color: 'var(--ivory-archive-text)',
             fontFamily: 'Georgia, serif',
             fontWeight: 600,
             lineHeight: 1.3,
@@ -79,7 +79,7 @@ const slides = [
         <p
           className="text-base md:text-lg max-w-2xl"
           style={{
-            color: 'var(--ivory-archive)',
+            color: 'var(--ivory-archive-text)',
             lineHeight: 1.7,
             opacity: 0.95,
           }}
@@ -99,8 +99,8 @@ const slides = [
         {/* Eyebrow */}
         <p
           className="text-xs md:text-sm uppercase mb-6 md:mb-8"
-          style={{
-            color: 'var(--ivory-archive)',
+            style={{
+            color: 'var(--ivory-archive-text)',
             letterSpacing: '0.2em',
           }}
         >
@@ -111,7 +111,7 @@ const slides = [
         <h3
           className="text-2xl md:text-4xl lg:text-5xl mb-4 md:mb-6"
           style={{
-            color: 'var(--ivory-archive)',
+            color: 'var(--ivory-archive-text)',
             fontFamily: 'Georgia, serif',
             fontWeight: 600,
             lineHeight: 1.3,
@@ -124,7 +124,7 @@ const slides = [
         <p
           className="text-base md:text-lg max-w-2xl"
           style={{
-            color: 'var(--ivory-archive)',
+            color: 'var(--ivory-archive-text)',
             lineHeight: 1.7,
             opacity: 0.95,
           }}

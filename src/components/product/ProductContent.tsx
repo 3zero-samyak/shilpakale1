@@ -24,9 +24,9 @@ export default function ProductContent({ product, onlyStoryButton = false }: Pro
     return (
       <button
         onClick={() => setIsStoryOpen(true)}
-        className="inline-flex items-center text-sm md:text-base lg:text-lg uppercase tracking-wider hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-transparent rounded px-2 py-1"
+        className="inline-flex items-center text-sm md:text-base lg:text-lg uppercase tracking-wider hover:opacity-70 transition-opacity focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-transparent rounded px-2 py-1"
         style={{
-          color: 'var(--ivory-archive)',
+          color: 'var(--ivory-archive-text)',
           letterSpacing: '0.1em',
           textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)',
         }}

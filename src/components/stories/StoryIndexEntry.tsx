@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { ShilpakaleStory } from '@/data/stories';
 
 interface StoryIndexEntryProps {
@@ -12,9 +13,10 @@ export default function StoryIndexEntry({ story, isLast = false }: StoryIndexEnt
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'minmax(4rem, 8rem) minmax(0, 1fr)',
+          gridTemplateColumns: 'minmax(4rem, 8rem) minmax(5rem, 7rem) minmax(0, 1fr)',
           gap: 'clamp(1.5rem, 3vw, 3rem)',
           paddingBlock: 'clamp(3rem, 5vw, 5rem)',
+          alignItems: 'start',
         }}
         className="story-entry-container"
       >
@@ -32,6 +34,24 @@ export default function StoryIndexEntry({ story, isLast = false }: StoryIndexEnt
         >
           {story.number}
         </div>
+        {/* Icon Column */}
+        {story.iconSrc ? (
+          <div style={{ paddingTop: '0.25rem' }} className="story-entry-icon">
+            <Image
+              src={story.iconSrc}
+              alt={`${story.productName} symbol`}
+              width={120}
+              height={120}
+              style={{
+                width: 'clamp(3.5rem, 7vw, 7rem)',
+                height: 'auto',
+                objectFit: 'contain',
+              }}
+            />
+          </div>
+        ) : (
+          <div />
+        )}
 
         {/* Content Column */}
         <div>
@@ -124,7 +144,7 @@ export default function StoryIndexEntry({ story, isLast = false }: StoryIndexEnt
           border-radius: 2px;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 420px) {
           .story-entry-container {
             grid-template-columns: 1fr !important;
             gap: clamp(1rem, 2vw, 1.5rem) !important;
@@ -132,6 +152,13 @@ export default function StoryIndexEntry({ story, isLast = false }: StoryIndexEnt
 
           .story-entry-number {
             padding-top: 0 !important;
+          }
+        }
+
+        @media (min-width: 421px) and (max-width: 1024px) {
+          .story-entry-container {
+            grid-template-columns: minmax(4rem, 6rem) minmax(3.5rem, 6rem) minmax(0, 1fr) !important;
+            gap: clamp(1rem, 3vw, 2rem) !important;
           }
         }
       `}</style>

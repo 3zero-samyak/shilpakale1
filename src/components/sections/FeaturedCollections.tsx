@@ -41,7 +41,7 @@ export default async function FeaturedCollections() {
             <h2
               className="uppercase"
               style={{
-                color: 'var(--ivory-archive)',
+                color: 'var(--ivory-archive-text)',
                 fontSize: 'clamp(0.78rem, 1.15vw, 1.05rem)',
                 letterSpacing: 'clamp(0.14em, 0.25vw, 0.22em)',
                 lineHeight: 1.2,

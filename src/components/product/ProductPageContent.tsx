@@ -39,7 +39,7 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
               <h1
               className="text-4xl md:text-5xl lg:text-6xl mb-3 md:mb-4"
               style={{
-                color: 'var(--ivory-archive)',
+                color: 'var(--ivory-archive-text)',
                 fontFamily: 'Georgia, serif',
                 fontWeight: 400,
                 lineHeight: 1.1,
@@ -54,7 +54,7 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
               <p
                 className="text-lg md:text-xl lg:text-2xl mb-4 md:mb-6"
                 style={{
-                  color: 'var(--ivory-archive)',
+                  color: 'var(--ivory-archive-text)',
                   opacity: 0.95,
                   lineHeight: 1.4,
                   textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)',
@@ -89,9 +89,9 @@ export default function ProductPageContent({ product }: ProductPageContentProps)
             {hasStory && (
               <button
                 onClick={() => setIsStoryOpen(true)}
-                className="inline-flex items-center mt-5 text-xs uppercase tracking-widest hover:opacity-70 transition-opacity focus:outline-none focus:ring-1 focus:ring-[var(--ivory-archive)] focus:ring-offset-1 rounded px-2 py-1"
+                className="inline-flex items-center mt-5 text-xs uppercase tracking-widest hover:opacity-70 transition-opacity focus:outline-none focus:ring-1 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-1 rounded px-2 py-1"
                 style={{
-                  color: 'var(--ivory-archive)',
+                  color: 'var(--ivory-archive-text)',
                   letterSpacing: '0.15em',
                   textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)',
                 }}

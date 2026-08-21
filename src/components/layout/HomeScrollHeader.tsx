@@ -72,7 +72,7 @@ export default function HomeScrollHeader() {
               aria-expanded={isMenuOpen}
               aria-controls="compact-navigation-menu"
               aria-label={isMenuOpen ? 'Close navigation' : 'Open navigation'}
-              className="flex flex-col items-center justify-center gap-1 w-9 h-9 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded compact-menu-toggle"
+              className="flex flex-col items-center justify-center gap-1 w-9 h-9 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded compact-menu-toggle"
             >
               {isMenuOpen ? (
                 // Close icon (X)
@@ -84,7 +84,7 @@ export default function HomeScrollHeader() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  style={{ color: 'var(--ivory-archive)' }}
+                  style={{ color: 'var(--ivory-archive-text)' }}
                   aria-hidden="true"
                 >
                   <line x1="18" y1="6" x2="6" y2="18" />
@@ -108,7 +108,7 @@ export default function HomeScrollHeader() {
           {/* Center: SHILPAKALE Wordmark */}
           <Link
             href="/"
-            className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
+            className="font-[var(--font-wordmark)] uppercase text-[var(--ivory-archive-text)] tracking-wide focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded px-2 py-1"
             style={{
               fontSize: 'clamp(1.05rem, 1.8vw, 1.5rem)',
               letterSpacing: '0.12em',
@@ -124,7 +124,7 @@ export default function HomeScrollHeader() {
               type="button"
               onClick={handleSearchToggle}
               aria-label="Search SHILPAKALE products"
-              className="flex items-center justify-center w-9 h-9 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
+              className="flex items-center justify-center w-9 h-9 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
             >
               <svg
                 className="w-4 h-4"
@@ -134,7 +134,7 @@ export default function HomeScrollHeader() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                style={{ color: 'var(--ivory-archive)' }}
+                style={{ color: 'var(--ivory-archive-text)' }}
                 aria-hidden="true"
               >
                 <circle cx="11" cy="11" r="8" />
@@ -146,7 +146,7 @@ export default function HomeScrollHeader() {
             <Link
               href="/account"
               aria-label="Open account options"
-              className="flex items-center justify-center w-9 h-9 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
+              className="flex items-center justify-center w-9 h-9 focus:outline-none focus:ring-2 focus:ring-[var(--ivory-archive-text)] focus:ring-offset-2 focus:ring-offset-[var(--heritage-green)] rounded"
             >
               <svg
                 className="w-4 h-4"
@@ -156,7 +156,7 @@ export default function HomeScrollHeader() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                style={{ color: 'var(--ivory-archive)' }}
+                style={{ color: 'var(--ivory-archive-text)' }}
                 aria-hidden="true"
               >
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
