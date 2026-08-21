@@ -107,19 +107,10 @@ export async function POST(req: Request) {
     try {
       const result = await createEnquiryMetaobject(persistenceInput);
       if (!result.ok) {
-        // Log structured Shopify userErrors safely: only code, field, message
+        // Minimal operational logging: indicate persistence failure and whether userErrors were present
         const errs = result.userErrors ?? [];
         if (errs.length) {
-          try {
-            const safe = errs.map(u => ({
-              code: u.code ?? null,
-              field: Array.isArray(u.field) ? u.field.join(',') : u.field ?? null,
-              message: u.message ?? null,
-            }));
-            console.error('[enquiry] persistence failed: metaobject userErrors', safe);
-          } catch {
-            console.error('[enquiry] persistence failed: metaobject userErrors (unserializable)');
-          }
+          console.error('[enquiry] persistence failed: metaobjectCreate returned userErrors', { count: errs.length });
         } else {
           console.error('[enquiry] persistence failed: unknown userErrors');
         }
@@ -134,8 +125,8 @@ export async function POST(req: Request) {
         console.log('[enquiry] Shopify Admin persistence not configured');
         return NextResponse.json({ error: 'ENQUIRY_STORAGE_NOT_CONFIGURED' }, { status: 503 });
       }
-      const msg = err instanceof Error ? err.message : String(err);
-      console.log('[enquiry] persistence exception', msg);
+      // Log a minimal exception marker without exposing internal messages or payloads
+      console.error('[enquiry] persistence exception');
       return NextResponse.json({ error: 'ENQUIRY_PERSISTENCE_FAILED' }, { status: 502 });
     }
   } catch {
