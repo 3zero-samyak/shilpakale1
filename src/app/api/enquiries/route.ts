@@ -107,7 +107,23 @@ export async function POST(req: Request) {
     try {
       const result = await createEnquiryMetaobject(persistenceInput);
       if (!result.ok) {
-        console.log('[enquiry] persistence failed: userErrors present');
+        // Log structured Shopify userErrors safely: only code, field, message
+        const errs = result.userErrors ?? [];
+        if (errs.length) {
+          try {
+            const safe = errs.map(u => ({
+              code: u.code ?? null,
+              field: Array.isArray(u.field) ? u.field.join(',') : u.field ?? null,
+              message: u.message ?? null,
+            }));
+            console.error('[enquiry] persistence failed: metaobject userErrors', safe);
+          } catch {
+            console.error('[enquiry] persistence failed: metaobject userErrors (unserializable)');
+          }
+        } else {
+          console.error('[enquiry] persistence failed: unknown userErrors');
+        }
+
         return NextResponse.json({ error: 'ENQUIRY_PERSISTENCE_FAILED' }, { status: 502 });
       }
       console.log('[enquiry] persistence succeeded');
